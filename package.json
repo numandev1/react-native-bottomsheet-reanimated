@@ -1,0 +1,21 @@
+{
+  "name": "react-native-bottomsheet-reanimated",
+  "version": "1.0.0",
+  "description": "Made with expo-library",
+  "author": "nomi9995",
+  "license": "MIT",
+  "repository": "nomi9995/react-native-bottomsheet-reanimated",
+  "scripts": {
+    "postinstall": "cd ./example && expo-yarn-workspaces postinstall"
+  },
+  "keywords": [
+   
+  ],
+  "devDependencies": {
+    "expo-yarn-workspaces": "^1.2.1"
+  },
+  "workspaces": [
+    "example"
+  ],
+  "private":true
+}
