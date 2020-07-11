@@ -14,6 +14,30 @@ const Screen = {
   height: Dimensions.get("window").height,
 };
 
+const showDismisButton=(props)=>{
+
+	if(props.isBackDismisByPress&&props.isBackDrop)
+	{
+		return true;
+	}
+	else
+	{
+		return false
+	}
+}
+
+const getSnapPoints=(snapPoints)=>{
+	return snapPoints.map(snapItem=>{
+		if(typeof snapItem === "string")
+		{
+			const parentValue=snapItem.split("%")[0];
+			snapItem=(Screen.height/100)*parentValue;
+		}
+		const snapObject={y:Screen.height-snapItem};
+		return snapObject;
+	})
+}
+
 class BottomPanel extends Component {
   constructor(props) {
     super(props);
@@ -22,23 +46,24 @@ class BottomPanel extends Component {
       snapToIndex: 0,
       points: 100,
       scrollValueY: new Animated.Value(0),
-      showDismisButton: true,
+			showDismisButton: showDismisButton(props)
     };
-  }
+	}
 
   onDrawerSnap = (snap) => {
     if (snap.nativeEvent.index > -1) {
+			if(showDismisButton(this.props))
       this.setState({ showDismisButton: true });
     }
-    const { snapPoints } = this.props;
-    if (snap.nativeEvent.index === snapPoints.length - 1) {
+    if (snap.nativeEvent.index === 0) {
+			if(showDismisButton(this.props))
       this.setState({ showDismisButton: false });
     }
   };
 
   onDismisHandler = () => {
     const { snapPoints } = this.props;
-    this.refs.bottomPanel.snapTo({ index: snapPoints.length - 1 });
+    this.refs.bottomPanel.snapTo({ index: 0 });
   };
 
   snapTo = (indexObject) => {
@@ -52,18 +77,15 @@ class BottomPanel extends Component {
 			isBackDismisByPress,
       header,
       body,
-      snapPoints,
       initialPosition,
-      backDrop,
+      isBackDrop=false,
       isModal,
       isAnimatedXFromParent,
       animatedValueY,
-    } = this.props;
+		} = this.props;
+		let {snapPoints}=this.props;
+		snapPoints=getSnapPoints(snapPoints);
     const { showDismisButton } = this.state;
-    let isBackDrop = backDrop;
-    if (isBackDrop === undefined) {
-      isBackDrop = true;
-    }
 
     return (
       <View style={styles.panelContainer} pointerEvents={"box-none"}>
