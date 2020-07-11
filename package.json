@@ -17,6 +17,7 @@
   ],
   "private": "true",
   "dependencies": {
+    "react-native-gesture-handler": "^1.6.1",
     "react-native-reanimated": "^1.9.0"
   }
 }
