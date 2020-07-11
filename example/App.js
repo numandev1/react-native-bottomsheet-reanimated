@@ -58,12 +58,12 @@ class App extends Component {
           isRouteWithTipHeader={true}
           header={
             <View>
-              <Text>Header</Text>
+              <Text style={styles.text}>Header</Text>
             </View>
           }
           body={
             <View style={styles.body}>
-              <Text>Body</Text>
+              <Text style={styles.text}>Body</Text>
             </View>
           }
         />
@@ -92,6 +92,10 @@ const styles = StyleSheet.create({
   body:{
     justifyContent:"center",
     alignItems:"center"
+  },
+  text:{
+    fontSize:20,
+    fontWeight:"bold"
   }
 });
 

@@ -14,7 +14,7 @@ const Screen = {
   height: Dimensions.get("window").height,
 };
 
-const showDismisButton = (props) => {
+const showDismisButtonFunction = (props) => {
   if (props.isBackDropDismisByPress && props.isBackDrop) {
     return true;
   } else {
@@ -41,23 +41,22 @@ class BottomPanel extends Component {
       snapToIndex: 0,
       points: 100,
       scrollValueY: new Animated.Value(0),
-      showDismisButton: showDismisButton(props),
+      showDismisButton: showDismisButtonFunction(props),
     };
   }
 
   onDrawerSnap = (snap) => {
     if (snap.nativeEvent.index > -1) {
-      if (showDismisButton(this.props))
+      if (showDismisButtonFunction(this.props))
         this.setState({ showDismisButton: true });
     }
     if (snap.nativeEvent.index === 0) {
-      if (showDismisButton(this.props))
+      if (showDismisButtonFunction(this.props))
         this.setState({ showDismisButton: false });
     }
   };
 
   onDismisHandler = () => {
-    const { snapPoints } = this.props;
     this.refs.bottomPanel.snapTo({ index: 0 });
   };
 
@@ -117,7 +116,6 @@ class BottomPanel extends Component {
           initialPosition={initialPosition}
           boundaries={{ top: isModal ? 0 : -300, bounce: isModal ? 0 : 0.5 }}
           animatedValueY={isAnimatedXFromParent ? animatedValueY : this._deltaY}
-          haptics={true}
           onSnap={this.onDrawerSnap}
         >
           {!isModal && showDismisButton && (
@@ -128,7 +126,8 @@ class BottomPanel extends Component {
               <View
                 style={{
                   height: Screen.height,
-                  marginTop: -Screen.height,
+									marginTop: -Screen.height,
+									zIndex:100
                 }}
               />
             </TouchableWithoutFeedback>
