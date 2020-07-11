@@ -7,36 +7,31 @@ import {
 } from "react-native";
 import Animated from "react-native-reanimated";
 
-import Interactable from 'react-native-interactable-reanimted'
+import Interactable from "react-native-interactable-reanimted";
 
 const Screen = {
   width: Dimensions.get("window").width,
   height: Dimensions.get("window").height,
 };
 
-const showDismisButton=(props)=>{
+const showDismisButton = (props) => {
+  if (props.isBackDropDismisByPress && props.isBackDrop) {
+    return true;
+  } else {
+    return false;
+  }
+};
 
-	if(props.isBackDismisByPress&&props.isBackDrop)
-	{
-		return true;
-	}
-	else
-	{
-		return false
-	}
-}
-
-const getSnapPoints=(snapPoints)=>{
-	return snapPoints.map(snapItem=>{
-		if(typeof snapItem === "string")
-		{
-			const parentValue=snapItem.split("%")[0];
-			snapItem=(Screen.height/100)*parentValue;
-		}
-		const snapObject={y:Screen.height-snapItem};
-		return snapObject;
-	})
-}
+const getSnapPoints = (snapPoints) => {
+  return snapPoints.map((snapItem) => {
+    if (typeof snapItem === "string") {
+      const parentValue = snapItem.split("%")[0];
+      snapItem = (Screen.height / 100) * parentValue;
+    }
+    const snapObject = { y: Screen.height - snapItem };
+    return snapObject;
+  });
+};
 
 class BottomPanel extends Component {
   constructor(props) {
@@ -46,18 +41,18 @@ class BottomPanel extends Component {
       snapToIndex: 0,
       points: 100,
       scrollValueY: new Animated.Value(0),
-			showDismisButton: showDismisButton(props)
+      showDismisButton: showDismisButton(props),
     };
-	}
+  }
 
   onDrawerSnap = (snap) => {
     if (snap.nativeEvent.index > -1) {
-			if(showDismisButton(this.props))
-      this.setState({ showDismisButton: true });
+      if (showDismisButton(this.props))
+        this.setState({ showDismisButton: true });
     }
     if (snap.nativeEvent.index === 0) {
-			if(showDismisButton(this.props))
-      this.setState({ showDismisButton: false });
+      if (showDismisButton(this.props))
+        this.setState({ showDismisButton: false });
     }
   };
 
@@ -72,19 +67,19 @@ class BottomPanel extends Component {
 
   render() {
     const {
-      bottomSheerColor="#FFFFFF",
+      bottomSheerColor = "#FFFFFF",
 			backDropColor = "#000000",
-			isBackDismisByPress,
+			isRouteWithTipHeader,
       header,
       body,
       initialPosition,
-      isBackDrop=false,
+      isBackDrop = false,
       isModal,
       isAnimatedXFromParent,
       animatedValueY,
-		} = this.props;
-		let {snapPoints}=this.props;
-		snapPoints=getSnapPoints(snapPoints);
+    } = this.props;
+    let { snapPoints } = this.props;
+    snapPoints = getSnapPoints(snapPoints);
     const { showDismisButton } = this.state;
 
     return (
@@ -133,7 +128,7 @@ class BottomPanel extends Component {
               <View
                 style={{
                   height: Screen.height,
-									marginTop: -Screen.height
+                  marginTop: -Screen.height,
                 }}
               />
             </TouchableWithoutFeedback>
@@ -143,9 +138,20 @@ class BottomPanel extends Component {
             style={[
               isModal ? styles.modal : styles.panel,
               { backgroundColor: bottomSheerColor },
+              isRouteWithTipHeader
+                ? {
+                    backgroundColor: "#f7f5eee8",
+                    borderTopLeftRadius: 12,
+                    borderTopRightRadius: 12,
+                    shadowColor: "#000000",
+                    shadowOffset: { width: 0, height: 0 },
+                    shadowRadius: 5,
+                    shadowOpacity: 0.4,
+                  }
+                : {},
             ]}
           >
-            {!isModal && <View style={styles.panelHandle} />}
+            {!isModal && isRouteWithTipHeader && <View style={styles.panelHandle} />}
             {!isModal && <View style={styles.panelHeader}>{header}</View>}
             {body}
           </View>
@@ -170,13 +176,6 @@ const styles = StyleSheet.create({
   },
   panel: {
     height: Screen.height + 300,
-    // backgroundColor: '#f7f5eee8',
-    borderTopLeftRadius: 12,
-    borderTopRightRadius: 12,
-    shadowColor: "#000000",
-    shadowOffset: { width: 0, height: 0 },
-    shadowRadius: 5,
-    shadowOpacity: 0.4,
   },
   modal: {
     height: Screen.height + 300,

@@ -14,8 +14,7 @@ const Screen = {
   width: Dimensions.get("window").width,
   height: Dimensions.get("window").height,
 };
-// -100, "35%"
-const snapPoints = [0,"50%","70%","100%"];
+const snapPoints = [0,Screen.height/2,"70%","100%"];
 class App extends Component {
   onOpenBottomSheetHandler = (index) => {
     this.refs.BottomSheet.snapTo({ index });
@@ -55,15 +54,16 @@ class App extends Component {
           snapPoints={snapPoints}
           isBackDrop={true}
           // isModal
-          isBackDismisByPress={true}
+          isBackDropDismisByPress={true}
+          isRouteWithTipHeader={true}
           header={
             <View>
-              <Text>nomi</Text>
+              <Text>Header</Text>
             </View>
           }
           body={
-            <View>
-              <Text>nomi</Text>
+            <View style={styles.body}>
+              <Text>Body</Text>
             </View>
           }
         />
@@ -75,8 +75,7 @@ class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: "center",
-    // alignItems: "center",
+    marginTop:30
   },
   box: {
     height: 50,
@@ -89,6 +88,10 @@ const styles = StyleSheet.create({
     justifyContent:"space-around",
     alignItems:"center",
     flexDirection:"row"
+  },
+  body:{
+    justifyContent:"center",
+    alignItems:"center"
   }
 });
 
