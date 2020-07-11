@@ -14,10 +14,10 @@ const Screen = {
   width: Dimensions.get("window").width,
   height: Dimensions.get("window").height,
 };
-const snapPoints = [0,Screen.height/2,"70%","100%"];
+const snapPoints = [0,Screen.height/2,"70%"];
 class App extends Component {
   onOpenBottomSheetHandler = (index) => {
-    this.refs.BottomSheet.snapTo({ index });
+    this.refs.BottomSheet.snapTo(index);
   };
   render() {
     return (

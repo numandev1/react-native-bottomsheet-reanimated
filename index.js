@@ -60,8 +60,8 @@ class BottomPanel extends Component {
     this.refs.bottomPanel.snapTo({ index: 0 });
   };
 
-  snapTo = (indexObject) => {
-    this.refs.bottomPanel.snapTo(indexObject);
+  snapTo = (index) => {
+    this.refs.bottomPanel.snapTo({index});
   };
 
   render() {
@@ -71,10 +71,10 @@ class BottomPanel extends Component {
 			isRouteWithTipHeader,
       header,
       body,
-      initialPosition,
+      initialPosition={ y: 0 },
       isBackDrop = false,
       isModal,
-      isAnimatedXFromParent,
+      isAnimatedYFromParent,
       animatedValueY,
     } = this.props;
     let { snapPoints } = this.props;
@@ -91,7 +91,7 @@ class BottomPanel extends Component {
               styles.panelContainer,
               {
                 backgroundColor: backDropColor,
-                opacity: isAnimatedXFromParent
+                opacity: isAnimatedYFromParent
                   ? animatedValueY.interpolate({
                       inputRange: [0, Screen.height - 100],
                       outputRange: [1, 0],
@@ -115,7 +115,7 @@ class BottomPanel extends Component {
           snapPoints={snapPoints}
           initialPosition={initialPosition}
           boundaries={{ top: isModal ? 0 : -300, bounce: isModal ? 0 : 0.5 }}
-          animatedValueY={isAnimatedXFromParent ? animatedValueY : this._deltaY}
+          animatedValueY={isAnimatedYFromParent ? animatedValueY : this._deltaY}
           onSnap={this.onDrawerSnap}
         >
           {!isModal && showDismisButton && (
@@ -126,8 +126,7 @@ class BottomPanel extends Component {
               <View
                 style={{
                   height: Screen.height,
-									marginTop: -Screen.height,
-									zIndex:100
+									marginTop: -Screen.height
                 }}
               />
             </TouchableWithoutFeedback>
