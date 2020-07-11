@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { StyleSheet, View, Text, Dimensions } from "react-native";
+import { StyleSheet, View, Text, Dimensions, TouchableOpacity } from "react-native";
 
 import BottomSheet from "react-native-bottomsheet-reanimated";
 
@@ -9,18 +9,24 @@ const Screen = {
 };
 
 class App extends Component {
-  componentDidMount(){
-    // console.log(this.refs,"nomi")
+  onOpenBottomSheetHandler=()=>{
+    this.refs.BottomSheet.snapTo({ index: 1 });
   }
   render() {
     return (
       <View style={styles.container}>
+      <TouchableOpacity onPress={this.onOpenBottomSheetHandler}>
+      <View>
+      <Text>nomi</Text>
+      </View>
+      </TouchableOpacity>
         <BottomSheet
           ref="BottomSheet"
           initialPosition={{ y: 300 }}
-          snapPoints={[{ y: 100 }, { y: Screen.height }]}
+          snapPoints={[{ y:Screen.height/2  }, { y: Screen.height }]}
           theme={{ colors: { background:"#ffffff" } }}
           backDrop={true}
+          backDropColor="#000000"
           header={
             <View>
               <Text>nomi</Text>

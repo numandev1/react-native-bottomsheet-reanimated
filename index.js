@@ -1,4 +1,3 @@
-/* @flow */
 
 import React, { Component } from 'react';
 import { View, StyleSheet, Dimensions, TouchableWithoutFeedback } from 'react-native';
@@ -38,11 +37,16 @@ class BottomPanel extends Component {
 		this.refs.bottomPanel.snapTo({ index: snapPoints.length - 1 });
 	};
 
+	snapTo=(indexObject)=>{
+		this.refs.bottomPanel.snapTo(indexObject);
+	}
+
 	render() {
 		const {
 			toggleTheme,
 			theme,
 			theme: { colors: { background } },
+			backDropColor="#000000",
 			header,
 			body,
 			snapPoints,
@@ -69,7 +73,7 @@ class BottomPanel extends Component {
 							style={[
 								styles.panelContainer,
 								{
-									backgroundColor: "red",
+									backgroundColor: backDropColor,
 									opacity: isAnimatedXFromParent
 										? animatedValueY.interpolate({
 												inputRange: [ 0, Screen.height - 100 ],
