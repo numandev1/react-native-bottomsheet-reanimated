@@ -1,6 +1,6 @@
 {
   "name": "react-native-bottomsheet-reanimated",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Made with expo-library",
   "author": "nomi9995",
   "license": "MIT",
@@ -8,14 +8,15 @@
   "scripts": {
     "postinstall": "cd ./example && expo-yarn-workspaces postinstall"
   },
-  "keywords": [
-   
-  ],
+  "keywords": [],
   "devDependencies": {
     "expo-yarn-workspaces": "^1.2.1"
   },
   "workspaces": [
     "example"
   ],
-  "private":true
+  "private": "true",
+  "dependencies": {
+    "react-native-reanimated": "^1.9.0"
+  }
 }
