@@ -15,7 +15,7 @@
   "workspaces": [
     "example"
   ],
-  "private": false,
+  "private": "true",
   "dependencies": {
     "react-native-gesture-handler": "^1.6.1",
     "react-native-interactable-reanimted": "^0.0.1",
