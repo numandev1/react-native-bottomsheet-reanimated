@@ -46,7 +46,7 @@ class Example extends React.Component {
           isBackDrop={true}
           // isModal
           isBackDropDismisByPress={true}
-          isRouteWithTipHeader={true}
+          isRoundBorderWithTipHeader={true}
           header={
             <View>
               <Text style={styles.text}>Header</Text>
@@ -74,7 +74,7 @@ class Example extends React.Component {
 | bottomSheerColor | no       | `#ffffff`  | for background color of bottom sheet. |
 | isBackDrop | no       | `false`  | for show backdrop behind the bottom sheet. |
 | isBackDropDismisByPress | no       | `false`  | enable to move bottomsheet to first snappoint by pressing backdrop. |
-| isRouteWithTipHeader | no       | `true`  | give round with tip header style to bottomsheet. |
+| isRoundBorderWithTipHeader | no       | `false`  | give round with tip header style to bottomsheet. |
 | isModal     | no       | `false`  | to make bottom sheet like modal. |
 | isAnimatedYFromParent        | no       |  | If `true` then give animated value to `animatedValueY` props. |
 | animatedValueY        | no       |  | If isAnimatedYFromParent will be `true` then it will give animtedY value to `animatedValueY` props. |

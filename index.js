@@ -68,7 +68,7 @@ class BottomPanel extends Component {
     const {
       bottomSheerColor = "#FFFFFF",
 			backDropColor = "#000000",
-			isRouteWithTipHeader,
+			isRoundBorderWithTipHeader=false,
       header,
       body,
       initialPosition={ y: 0 },
@@ -136,7 +136,7 @@ class BottomPanel extends Component {
             style={[
               isModal ? styles.modal : styles.panel,
               { backgroundColor: bottomSheerColor },
-              isRouteWithTipHeader
+              isRoundBorderWithTipHeader
                 ? {
                     backgroundColor: "#f7f5eee8",
                     borderTopLeftRadius: 12,
@@ -149,7 +149,7 @@ class BottomPanel extends Component {
                 : {},
             ]}
           >
-            {!isModal && isRouteWithTipHeader && <View style={styles.panelHandle} />}
+            {!isModal && isRoundBorderWithTipHeader && <View style={styles.panelHandle} />}
             {!isModal && <View style={styles.panelHeader}>{header}</View>}
             {body}
           </View>

@@ -14,7 +14,7 @@ const Screen = {
   width: Dimensions.get("window").width,
   height: Dimensions.get("window").height,
 };
-const snapPoints = [0,Screen.height/2,"70%"];
+const snapPoints = [0,Screen.height/2,"70%","100%"];
 class App extends Component {
   onOpenBottomSheetHandler = (index) => {
     this.refs.BottomSheet.snapTo(index);
@@ -55,7 +55,7 @@ class App extends Component {
           isBackDrop={true}
           // isModal
           isBackDropDismisByPress={true}
-          isRouteWithTipHeader={true}
+          isRoundBorderWithTipHeader={true}
           header={
             <View>
               <Text style={styles.text}>Header</Text>
