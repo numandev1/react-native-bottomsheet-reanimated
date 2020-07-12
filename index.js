@@ -75,7 +75,11 @@ class BottomPanel extends Component {
       isBackDrop = false,
       isModal,
       isAnimatedYFromParent,
-      animatedValueY,
+			animatedValueY,
+			containerStyle,
+			tipStyle,
+			headerStyle,
+			bodyStyle
     } = this.props;
     let { snapPoints } = this.props;
     snapPoints = getSnapPoints(snapPoints);
@@ -144,14 +148,15 @@ class BottomPanel extends Component {
                     shadowColor: "#000000",
                     shadowOffset: { width: 0, height: 0 },
                     shadowRadius: 5,
-                    shadowOpacity: 0.4,
+										shadowOpacity: 0.4
                   }
-                : {},
+								: {},
+								containerStyle
             ]}
           >
-            {!isModal && isRoundBorderWithTipHeader && <View style={styles.panelHandle} />}
-            {!isModal && <View style={styles.panelHeader}>{header}</View>}
-            {body}
+            {!isModal && isRoundBorderWithTipHeader && <View style={[styles.panelHandle,tipStyle]} />}
+            {!isModal && <View style={[styles.panelHeader,headerStyle]}>{header}</View>}
+            <View style={bodyStyle}>{body}</View>
           </View>
         </Interactable.View>
       </View>

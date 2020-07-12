@@ -53,9 +53,13 @@ class App extends Component {
           initialPosition={{ y: 300 }}
           snapPoints={snapPoints}
           isBackDrop={true}
-          // isModal
           isBackDropDismisByPress={true}
           isRoundBorderWithTipHeader={true}
+          // isModal
+          // containerStyle={{backgroundColor:"red"}}
+          // tipStyle={{backgroundColor:"red"}}
+          // headerStyle={{backgroundColor:"red"}}
+          // bodyStyle={{backgroundColor:"red",flex:1}}
           header={
             <View>
               <Text style={styles.text}>Header</Text>

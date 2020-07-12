@@ -44,9 +44,13 @@ class Example extends React.Component {
           initialPosition={{ y: 300 }}
           snapPoints={snapPoints}
           isBackDrop={true}
-          // isModal
           isBackDropDismisByPress={true}
           isRoundBorderWithTipHeader={true}
+          // isModal
+          // containerStyle={{backgroundColor:"red"}}
+          // tipStyle={{backgroundColor:"red"}}
+          // headerStyle={{backgroundColor:"red"}}
+          // bodyStyle={{backgroundColor:"red",flex:1}}
           header={
             <View>
               <Text style={styles.text}>Header</Text>
@@ -71,13 +75,16 @@ class Example extends React.Component {
 | initialPosition               | no       |    0    | Determines initial snap point of bottom sheet. The value is the index from snapPoints. |
 | body             | no       |         | Method for rendering scrollable content of bottom sheet. |
 | header              | no       |         | Method for rendering non-scrollable header of bottom sheet. |
-| bottomSheerColor | no       | `#ffffff`  | for background color of bottom sheet. |
 | isBackDrop | no       | `false`  | for show backdrop behind the bottom sheet. |
 | isBackDropDismisByPress | no       | `false`  | enable to move bottomsheet to first snappoint by pressing backdrop. |
 | isRoundBorderWithTipHeader | no       | `false`  | give round with tip header style to bottomsheet. |
 | isModal     | no       | `false`  | to make bottom sheet like modal. |
 | isAnimatedYFromParent        | no       |  | If `true` then give animated value to `animatedValueY` props. |
 | animatedValueY        | no       |  | If isAnimatedYFromParent will be `true` then it will give animtedY value to `animatedValueY` props. |
+| bottomSheerColor | no       | `#ffffff`  | for background color of bottom sheet. |
+| tipStyle | no       |   | for change style of tip. it is dependted on `isRoundBorderWithTipHeader`. |
+| headerStyle | no       |   | for change style of header. |
+| bodyStyle | no       |   | for change style of body. |
 
 
 ## Methods
