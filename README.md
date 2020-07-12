@@ -41,7 +41,7 @@ class Example extends React.Component {
           bottomSheerColor="#FFFFFF"
           // backDropColor="red"
           ref="BottomSheet"
-          initialPosition={{ y: 300 }}
+          initialPosition={"50%"}  //200, 300
           snapPoints={snapPoints}
           isBackDrop={true}
           isBackDropDismisByPress={true}
@@ -72,7 +72,7 @@ class Example extends React.Component {
 | name                      | required | default | description |
 | ------------------------- | -------- | ------- | ------------|
 | snapPoints                | yes      |         | E.g. `[300, 200, 0]`. Points for snapping of bottom sheet coomponent. They define distance from bottom of the screen. Might be number or percent (as string e.g. `'20%'`) for points or percents of screen height from bottom. Note: Array values must be in descending order. |
-| initialPosition               | no       |    0    | Determines initial snap point of bottom sheet. The value is the index from snapPoints. |
+| initialPosition               | no       |    0    | Determines initial position point of bottom sheet. The value outside of snap points. |
 | body             | no       |         | Method for rendering scrollable content of bottom sheet. |
 | header              | no       |         | Method for rendering non-scrollable header of bottom sheet. |
 | isBackDrop | no       | `false`  | for show backdrop behind the bottom sheet. |

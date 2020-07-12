@@ -50,7 +50,7 @@ class App extends Component {
           bottomSheerColor="#FFFFFF"
           // backDropColor="red"
           ref="BottomSheet"
-          initialPosition={{ y: 300 }}
+          initialPosition={"50%"}
           snapPoints={snapPoints}
           isBackDrop={true}
           isBackDropDismisByPress={true}

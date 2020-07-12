@@ -33,6 +33,15 @@ const getSnapPoints = (snapPoints) => {
   });
 };
 
+const getInitialPosition = (snapPoint) => {
+    if (typeof snapPoint === "string") {
+      const parentValue = snapPoint.split("%")[0];
+      snapPoint = (Screen.height / 100) * parentValue;
+    }
+    const snapObject = { y: Screen.height - snapPoint };
+    return snapObject;
+};
+
 class BottomPanel extends Component {
   constructor(props) {
     super(props);
@@ -71,7 +80,6 @@ class BottomPanel extends Component {
 			isRoundBorderWithTipHeader=false,
       header,
       body,
-      initialPosition={ y: 0 },
       isBackDrop = false,
       isModal,
       isAnimatedYFromParent,
@@ -81,8 +89,9 @@ class BottomPanel extends Component {
 			headerStyle,
 			bodyStyle
     } = this.props;
-    let { snapPoints } = this.props;
+    let { snapPoints,initialPosition={ y: 0 }, } = this.props;
     snapPoints = getSnapPoints(snapPoints);
+    initialPosition = getInitialPosition(initialPosition);
     const { showDismisButton } = this.state;
 
     return (
