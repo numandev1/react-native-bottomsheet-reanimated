@@ -1,6 +1,6 @@
 {
   "name": "react-native-bottomsheet-reanimated",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Made with expo-library",
   "author": "nomi9995",
   "license": "MIT",
@@ -8,7 +8,6 @@
   "scripts": {
     "postinstall": "cd ./example && expo-yarn-workspaces postinstall"
   },
-  "keywords": [],
   "devDependencies": {
     "expo-yarn-workspaces": "^1.2.1"
   },
@@ -20,5 +19,13 @@
     "react-native-gesture-handler": "^1.6.1",
     "react-native-interactable-reanimted": "^0.0.2",
     "react-native-reanimated": "^1.9.0"
-  }
+  },
+  "keywords": [
+    "react-native",
+    "bottom-sheet",
+    "reanimated",
+    "gesture",
+    "handler",
+    "react-native-bottomsheet-reanimated"
+  ]
 }
