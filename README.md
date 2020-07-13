@@ -95,7 +95,7 @@ Imperative method on for snapping to snap point in given index. E.g.
 
 ```javascript
 // Snap to the snap point at index 0 (e.g. 450 in [450, 300, 0])
-this.refs.BottomSheet.current.snapTo(9)
+this.refs.BottomSheet.current.snapTo(0)
 ```
 
 Here `this.refs.BottomSheet` refers [to the `ref`](https://reactjs.org/docs/react-api.html#reactcreateref) passed to the `BottomSheet` component.
