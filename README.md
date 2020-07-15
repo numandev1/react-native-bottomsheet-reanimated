@@ -39,13 +39,13 @@ class Example extends React.Component {
       <View style={styles.container}>
         <BottomSheet
           bottomSheerColor="#FFFFFF"
-          // backDropColor="red"
           ref="BottomSheet"
           initialPosition={"50%"}  //200, 300
-          snapPoints={snapPoints}
+          snapPoints={["50%","100%"]}
           isBackDrop={true}
           isBackDropDismisByPress={true}
           isRoundBorderWithTipHeader={true}
+          // backDropColor="red"
           // isModal
           // containerStyle={{backgroundColor:"red"}}
           // tipStyle={{backgroundColor:"red"}}
