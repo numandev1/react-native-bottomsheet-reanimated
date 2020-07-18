@@ -1,7 +1,7 @@
 # react-native-bottomsheet-reanimated
 Highly configurable component imitating [native bottom sheet behavior](https://material.io/design/components/sheets-bottom.html#standard-bottom-sheet), with fully native 60 FPS animations!
 
-Built from scratch with [react-native-interactable-reanimted](https://www.npmjs.com/package/react-native-interactable-reanimted) and [react-native-reanimated](https://github.com/kmagiera/react-native-reanimated).
+Built from scratch with [react-native-interactable-reanimated](https://www.npmjs.com/package/react-native-interactable-reanimated) and [react-native-reanimated](https://github.com/kmagiera/react-native-reanimated).
 
 Usable with Expo with no extra native dependencies!
 
