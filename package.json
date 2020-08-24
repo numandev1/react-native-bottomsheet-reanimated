@@ -1,6 +1,6 @@
 {
   "name": "react-native-bottomsheet-reanimated",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Made with expo-library",
   "author": "nomi9995",
   "license": "MIT",
@@ -15,6 +15,8 @@
     "example"
   ],
   "dependencies": {
+  },
+  "peerDependencies": {
     "react-native-gesture-handler": "^1.6.1",
     "react-native-interactable-reanimated": "^0.0.4",
     "react-native-reanimated": "^1.9.0"
