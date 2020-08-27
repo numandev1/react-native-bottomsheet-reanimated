@@ -1,6 +1,6 @@
 {
   "name": "react-native-bottomsheet-reanimated",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "react-native-bottomsheet-reanimated made with reanimted and interactable",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -84,7 +84,6 @@
   },
   "husky": {
     "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "yarn lint && yarn typescript"
     }
   },

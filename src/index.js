@@ -1,17 +1,17 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   View,
   StyleSheet,
   Dimensions,
   TouchableWithoutFeedback,
-} from "react-native";
-import Animated from "react-native-reanimated";
+} from 'react-native';
+import Animated from 'react-native-reanimated';
 
-import Interactable from "react-native-interactable-reanimated";
+import Interactable from 'react-native-interactable-reanimated';
 
 const Screen = {
-  width: Dimensions.get("window").width,
-  height: Dimensions.get("window").height,
+  width: Dimensions.get('window').width,
+  height: Dimensions.get('window').height,
 };
 
 const showDismisButtonFunction = (props) => {
@@ -24,8 +24,8 @@ const showDismisButtonFunction = (props) => {
 
 const getSnapPoints = (snapPoints) => {
   return snapPoints.map((snapItem) => {
-    if (typeof snapItem === "string") {
-      const parentValue = snapItem.split("%")[0];
+    if (typeof snapItem === 'string') {
+      const parentValue = snapItem.split('%')[0];
       snapItem = (Screen.height / 100) * parentValue;
     }
     const snapObject = { y: Screen.height - snapItem };
@@ -34,12 +34,12 @@ const getSnapPoints = (snapPoints) => {
 };
 
 const getInitialPosition = (snapPoint) => {
-    if (typeof snapPoint === "string") {
-      const parentValue = snapPoint.split("%")[0];
-      snapPoint = (Screen.height / 100) * parentValue;
-    }
-    const snapObject = { y: Screen.height - snapPoint };
-    return snapObject;
+  if (typeof snapPoint === 'string') {
+    const parentValue = snapPoint.split('%')[0];
+    snapPoint = (Screen.height / 100) * parentValue;
+  }
+  const snapObject = { y: Screen.height - snapPoint };
+  return snapObject;
 };
 
 class BottomPanel extends Component {
@@ -70,36 +70,37 @@ class BottomPanel extends Component {
   };
 
   snapTo = (index) => {
-    this.refs.bottomPanel.snapTo({index});
+    this.refs.bottomPanel.snapTo({ index });
   };
 
   render() {
     const {
-      bottomSheerColor = "#FFFFFF",
-			backDropColor = "#000000",
-			isRoundBorderWithTipHeader=false,
+      bottomSheerColor = '#FFFFFF',
+      backDropColor = '#000000',
+      isRoundBorderWithTipHeader = false,
       header,
       body,
       isBackDrop = false,
       isModal,
       isAnimatedYFromParent,
-			animatedValueY,
-			containerStyle,
-			tipStyle,
-			headerStyle,
-			bodyStyle
+      animatedValueY,
+      containerStyle,
+      tipStyle,
+      headerStyle,
+      bodyStyle,
+      isBackDropDismisByPress,
     } = this.props;
-    let { snapPoints,initialPosition={ y: 0 }, } = this.props;
+    let { snapPoints, initialPosition = { y: 0 } } = this.props;
     snapPoints = getSnapPoints(snapPoints);
     initialPosition = getInitialPosition(initialPosition);
     const { showDismisButton } = this.state;
 
     return (
-      <View style={styles.panelContainer} pointerEvents={"box-none"}>
+      <View style={styles.panelContainer} pointerEvents={'box-none'}>
         {/* Backdrop */}
         {isBackDrop && (
           <Animated.View
-            pointerEvents={"box-none"}
+            pointerEvents={'box-none'}
             style={[
               styles.panelContainer,
               {
@@ -108,12 +109,12 @@ class BottomPanel extends Component {
                   ? animatedValueY.interpolate({
                       inputRange: [0, Screen.height - 100],
                       outputRange: [1, 0],
-                      extrapolateRight: "clamp",
+                      extrapolateRight: 'clamp',
                     })
                   : this._deltaY.interpolate({
                       inputRange: [0, Screen.height - 100],
                       outputRange: [1, 0],
-                      extrapolateRight: "clamp",
+                      extrapolateRight: 'clamp',
                     }),
               },
             ]}
@@ -134,12 +135,12 @@ class BottomPanel extends Component {
           {!isModal && showDismisButton && (
             <TouchableWithoutFeedback
               onPress={this.onDismisHandler}
-              disabled={isBackDrop ? false : true}
+              disabled={isBackDropDismisByPress ? false : true}
             >
               <View
                 style={{
                   height: Screen.height,
-									marginTop: -Screen.height
+                  marginTop: -Screen.height,
                 }}
               />
             </TouchableWithoutFeedback>
@@ -151,20 +152,24 @@ class BottomPanel extends Component {
               { backgroundColor: bottomSheerColor },
               isRoundBorderWithTipHeader
                 ? {
-                    backgroundColor: "#f7f5eee8",
+                    backgroundColor: '#f7f5eee8',
                     borderTopLeftRadius: 12,
                     borderTopRightRadius: 12,
-                    shadowColor: "#000000",
+                    shadowColor: '#000000',
                     shadowOffset: { width: 0, height: 0 },
                     shadowRadius: 5,
-										shadowOpacity: 0.4
+                    shadowOpacity: 0.4,
                   }
-								: {},
-								containerStyle
+                : {},
+              containerStyle,
             ]}
           >
-            {!isModal && isRoundBorderWithTipHeader && <View style={[styles.panelHandle,tipStyle]} />}
-            {!isModal && <View style={[styles.panelHeader,headerStyle]}>{header}</View>}
+            {!isModal && isRoundBorderWithTipHeader && (
+              <View style={[styles.panelHandle, tipStyle]} />
+            )}
+            {!isModal && (
+              <View style={[styles.panelHeader, headerStyle]}>{header}</View>
+            )}
             <View style={bodyStyle}>{body}</View>
           </View>
         </Interactable.View>
@@ -178,12 +183,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   panelHandle: {
-    position: "absolute",
-    alignSelf: "center",
+    position: 'absolute',
+    alignSelf: 'center',
     width: 40,
     height: 6,
     borderRadius: 4,
-    backgroundColor: "#00000040",
+    backgroundColor: '#00000040',
     marginVertical: 8,
   },
   panel: {
@@ -196,7 +201,7 @@ const styles = StyleSheet.create({
     padding: 30,
   },
   panelContainer: {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     bottom: 0,
     left: 0,
