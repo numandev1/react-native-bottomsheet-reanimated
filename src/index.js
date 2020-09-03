@@ -4,22 +4,14 @@ import {
   StyleSheet,
   Dimensions,
   TouchableWithoutFeedback,
+  Keyboard,
 } from 'react-native';
 import Animated from 'react-native-reanimated';
-
 import Interactable from 'react-native-interactable-reanimated';
 
 const Screen = {
   width: Dimensions.get('window').width,
   height: Dimensions.get('window').height,
-};
-
-const showDismisButtonFunction = (props) => {
-  if (props.isBackDropDismisByPress && props.isBackDrop) {
-    return true;
-  } else {
-    return false;
-  }
 };
 
 const getSnapPoints = (snapPoints) => {
@@ -50,26 +42,39 @@ class BottomPanel extends Component {
       snapToIndex: 0,
       points: 100,
       scrollValueY: new Animated.Value(0),
-      showDismisButton: showDismisButtonFunction(props),
+      isDismissWithPress: props.isBackDropDismissByPress
+        ? props.isBackDropDismissByPress
+        : false,
+      isBottomSheetDismissed:
+        props.initialPosition === 0 || props.initialPosition === '0%',
     };
   }
 
   onDrawerSnap = (snap) => {
-    if (snap.nativeEvent.index > -1) {
-      if (showDismisButtonFunction(this.props))
-        this.setState({ showDismisButton: true });
-    }
-    if (snap.nativeEvent.index === 0) {
-      if (showDismisButtonFunction(this.props))
-        this.setState({ showDismisButton: false });
+    const { snapPoints } = this.props;
+    if (
+      snapPoints[snap.nativeEvent.index] === 0 ||
+      snapPoints[snap.nativeEvent.index] === '0%'
+    ) {
+      this.setState({ isBottomSheetDismissed: true });
+    } else {
+      this.setState({ isBottomSheetDismissed: false });
     }
   };
 
-  onDismisHandler = () => {
-    this.refs.bottomPanel.snapTo({ index: 0 });
+  dismissBottomSheet = () => {
+    const { snapPoints } = this.props;
+    let index = snapPoints.findIndex((x) => x === 0 || x === '0%');
+    if (index !== -1) {
+      this.refs.bottomPanel.snapTo({ index });
+    }
   };
 
   snapTo = (index) => {
+    const { snapPoints } = this.props;
+    if (snapPoints.findIndex((x) => x === 0 || x === '0%') !== -1) {
+      Keyboard.dismiss();
+    }
     this.refs.bottomPanel.snapTo({ index });
   };
 
@@ -88,19 +93,17 @@ class BottomPanel extends Component {
       tipStyle,
       headerStyle,
       bodyStyle,
-      isBackDropDismisByPress,
     } = this.props;
     let { snapPoints, initialPosition = { y: 0 } } = this.props;
     snapPoints = getSnapPoints(snapPoints);
     initialPosition = getInitialPosition(initialPosition);
-    const { showDismisButton } = this.state;
-
+    const { isDismissWithPress, isBottomSheetDismissed } = this.state;
     return (
       <View style={styles.panelContainer} pointerEvents={'box-none'}>
         {/* Backdrop */}
         {isBackDrop && (
           <Animated.View
-            pointerEvents={'box-none'}
+            pointerEvents={!isBottomSheetDismissed ? 'auto' : 'box-none'}
             style={[
               styles.panelContainer,
               {
@@ -121,7 +124,6 @@ class BottomPanel extends Component {
           />
         )}
 
-        {/* Bottom Panel */}
         <Interactable.View
           dragEnabled={isModal ? false : true}
           verticalOnly={true}
@@ -132,10 +134,10 @@ class BottomPanel extends Component {
           animatedValueY={isAnimatedYFromParent ? animatedValueY : this._deltaY}
           onSnap={this.onDrawerSnap}
         >
-          {!isModal && showDismisButton && (
+          {!isModal && isDismissWithPress && !isBottomSheetDismissed && (
             <TouchableWithoutFeedback
-              onPress={this.onDismisHandler}
-              disabled={isBackDropDismisByPress ? false : true}
+              onPress={this.dismissBottomSheet}
+              disabled={isBackDrop ? false : true}
             >
               <View
                 style={{
@@ -198,7 +200,7 @@ const styles = StyleSheet.create({
     height: Screen.height + 300,
   },
   panelHeader: {
-    padding: 30,
+    padding: 16,
   },
   panelContainer: {
     position: 'absolute',
@@ -208,5 +210,5 @@ const styles = StyleSheet.create({
     right: 0,
   },
 });
-// BottomPanel.BottomPanelOffset = 80;
+
 export default BottomPanel;

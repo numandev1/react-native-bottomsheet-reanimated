@@ -19,6 +19,7 @@ class App extends Component {
   onOpenBottomSheetHandler = (index) => {
     this.refs.BottomSheet.snapTo(index);
   };
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -52,7 +53,7 @@ class App extends Component {
           initialPosition={'50%'}
           snapPoints={snapPoints}
           isBackDrop={true}
-          isBackDropDismisByPress={true}
+          isBackDropDismissByPress={true}
           isRoundBorderWithTipHeader={true}
           // isModal
           // containerStyle={{backgroundColor:"red"}}
