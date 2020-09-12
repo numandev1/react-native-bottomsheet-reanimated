@@ -124,6 +124,15 @@ class BottomPanel extends Component {
           />
         )}
 
+        {!isModal && isDismissWithPress && !isBottomSheetDismissed && (
+          <TouchableWithoutFeedback
+            onPress={this.dismissBottomSheet}
+            disabled={isBackDrop ? false : true}
+          >
+            <View style={styles.panelContainer} />
+          </TouchableWithoutFeedback>
+        )}
+
         <Interactable.View
           dragEnabled={isModal ? false : true}
           verticalOnly={true}
@@ -134,20 +143,6 @@ class BottomPanel extends Component {
           animatedValueY={isAnimatedYFromParent ? animatedValueY : this._deltaY}
           onSnap={this.onDrawerSnap}
         >
-          {!isModal && isDismissWithPress && !isBottomSheetDismissed && (
-            <TouchableWithoutFeedback
-              onPress={this.dismissBottomSheet}
-              disabled={isBackDrop ? false : true}
-            >
-              <View
-                style={{
-                  height: Screen.height,
-                  marginTop: -Screen.height,
-                }}
-              />
-            </TouchableWithoutFeedback>
-          )}
-
           <View
             style={[
               isModal ? styles.modal : styles.panel,
