@@ -57,6 +57,7 @@ class BottomPanel extends Component {
       snapPoints[snap.nativeEvent.index] === '0%'
     ) {
       this.setState({ isBottomSheetDismissed: true });
+      Keyboard.dismiss();
     } else {
       this.setState({ isBottomSheetDismissed: false });
     }
@@ -71,10 +72,6 @@ class BottomPanel extends Component {
   };
 
   snapTo = (index) => {
-    const { snapPoints } = this.props;
-    if (snapPoints.findIndex((x) => x === 0 || x === '0%') !== -1) {
-      Keyboard.dismiss();
-    }
     this.refs.bottomPanel.snapTo({ index });
   };
 
