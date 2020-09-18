@@ -38,9 +38,8 @@ class BottomPanel extends Component {
   constructor(props) {
     super(props);
     this._deltaY = new Animated.Value(Screen.height);
+    this.snapToIndex = 0;
     this.state = {
-      snapToIndex: 0,
-      points: 100,
       scrollValueY: new Animated.Value(0),
       isDismissWithPress: props.isBackDropDismissByPress
         ? props.isBackDropDismissByPress
@@ -52,6 +51,7 @@ class BottomPanel extends Component {
 
   onDrawerSnap = (snap) => {
     const { snapPoints } = this.props;
+    this.snapToIndex = snap.nativeEvent.index;
     if (
       snapPoints[snap.nativeEvent.index] === 0 ||
       snapPoints[snap.nativeEvent.index] === '0%'
