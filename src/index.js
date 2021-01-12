@@ -74,7 +74,7 @@ class BottomPanel extends Component {
     const { snapPoints } = this.props;
     let index = snapPoints.findIndex((x) => x === 0 || x === '0%');
     if (index !== -1) {
-      this.sheetRef.current.snapTo({ index });
+      this.sheetRef.snapTo({ index });
     }
   };
 
@@ -83,7 +83,7 @@ class BottomPanel extends Component {
     if (snapPoints.findIndex((x) => x === 0 || x === '0%') !== -1) {
       Keyboard.dismiss();
     }
-    this.sheetRef.current.snapTo({ index });
+    this.sheetRef.snapTo({ index });
   };
 
   render() {
