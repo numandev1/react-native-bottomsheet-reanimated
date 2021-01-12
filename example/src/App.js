@@ -16,8 +16,13 @@ const Screen = {
 };
 const snapPoints = [0, Screen.height / 2, '70%', '100%'];
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.sheetRef = React.createRef();
+  }
+
   onOpenBottomSheetHandler = (index) => {
-    this.refs.BottomSheet.snapTo(index);
+    this.sheetRef.current.snapTo(index);
   };
 
   render() {
@@ -49,7 +54,7 @@ class App extends Component {
         <BottomSheet
           bottomSheerColor="#FFFFFF"
           // backDropColor="red"
-          ref="BottomSheet"
+          ref={(ref) => (this.sheetRef = ref)}
           initialPosition={'50%'}
           snapPoints={snapPoints}
           isBackDrop={true}
