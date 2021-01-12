@@ -51,12 +51,18 @@ class BottomPanel extends Component {
   }
 
   onDrawerSnap = (snap) => {
-    const { snapPoints } = this.props;
+    const { snapPoints, onReachEnd, onReachTop } = this.props;
+
     if (
       snapPoints[snap.nativeEvent.index] === 0 ||
       snapPoints[snap.nativeEvent.index] === '0%'
     ) {
       this.setState({ isBottomSheetDismissed: true });
+      onReachEnd && onReachEnd();
+    } else if (
+      snapPoints[snap.nativeEvent.index] === snapPoints[snapPoints.length - 1]
+    ) {
+      onReachTop && onReachTop();
     } else {
       this.setState({ isBottomSheetDismissed: false });
     }
@@ -93,6 +99,8 @@ class BottomPanel extends Component {
       tipStyle,
       headerStyle,
       bodyStyle,
+      renderTip = true,
+      onBackDropPress,
     } = this.props;
     let { snapPoints, initialPosition = { y: 0 } } = this.props;
     snapPoints = getSnapPoints(snapPoints);
@@ -110,15 +118,15 @@ class BottomPanel extends Component {
                 backgroundColor: backDropColor,
                 opacity: isAnimatedYFromParent
                   ? animatedValueY.interpolate({
-                      inputRange: [0, Screen.height - 100],
-                      outputRange: [1, 0],
-                      extrapolateRight: 'clamp',
-                    })
+                    inputRange: [0, Screen.height - 100],
+                    outputRange: [1, 0],
+                    extrapolateRight: 'clamp',
+                  })
                   : this._deltaY.interpolate({
-                      inputRange: [0, Screen.height - 100],
-                      outputRange: [1, 0],
-                      extrapolateRight: 'clamp',
-                    }),
+                    inputRange: [0, Screen.height - 100],
+                    outputRange: [1, 0],
+                    extrapolateRight: 'clamp',
+                  }),
               },
             ]}
           />
@@ -136,8 +144,10 @@ class BottomPanel extends Component {
         >
           {!isModal && isDismissWithPress && !isBottomSheetDismissed && (
             <TouchableWithoutFeedback
-              onPress={this.dismissBottomSheet}
-              disabled={isBackDrop ? false : true}
+              onPress={() => {
+                this.dismissBottomSheet();
+                onBackDropPress && onBackDropPress()
+              }}
             >
               <View
                 style={{
@@ -149,12 +159,14 @@ class BottomPanel extends Component {
           )}
 
           <View
-            style={[
-              isModal ? styles.modal : styles.panel,
-              { backgroundColor: bottomSheerColor },
-              isRoundBorderWithTipHeader
-                ? {
-                    backgroundColor: '#f7f5eee8',
+            style={
+              renderTip &&
+              [
+                isModal ? styles.modal : styles.panel,
+                { backgroundColor: bottomSheerColor },
+                isRoundBorderWithTipHeader
+                  ? {
+                    backgroundColor: bottomSheerColor,
                     borderTopLeftRadius: 12,
                     borderTopRightRadius: 12,
                     shadowColor: '#000000',
@@ -162,11 +174,11 @@ class BottomPanel extends Component {
                     shadowRadius: 5,
                     shadowOpacity: 0.4,
                   }
-                : {},
-              containerStyle,
-            ]}
+                  : {},
+                containerStyle,
+              ]}
           >
-            {!isModal && isRoundBorderWithTipHeader && (
+            {!isModal && isRoundBorderWithTipHeader && renderTip && (
               <View style={[styles.panelHandle, tipStyle]} />
             )}
             {!isModal && (
@@ -194,7 +206,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   panel: {
-    height: Screen.height + 300,
+    height: Screen.height + 100,
   },
   modal: {
     height: Screen.height + 300,
