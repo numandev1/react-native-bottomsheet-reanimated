@@ -9,7 +9,6 @@ Usable with Expo with no extra native dependencies!
 | ![](media/bottom1.gif) | ![](media/bottom2.gif) | ![](media/bottom3.gif) |
 | :--------------------: | :--------------------: | :--------------------: |
 
-
 ## Installation
 
 Open a Terminal in the project root and run:
@@ -86,6 +85,10 @@ class Example extends React.Component {
 | tipStyle                   | no       |           | for change style of tip. it is dependted on `isRoundBorderWithTipHeader`.                                                                                                                                                                                                      |
 | headerStyle                | no       |           | for change style of header.                                                                                                                                                                                                                                                    |
 | bodyStyle                  | no       |           | for change style of body.                                                                                                                                                                                                                                                      |
+| renderTip                  | no       | true      | If "false" then it won't render the header tip.                                                                                                                                                                                                                                |
+| onReachTop                 | no       | function  | Called when the BottomSheet component reaches the last snap index                                                                                                                                                                                                              |
+| onReachEnd                 | no       | function  | Called when the BottomSheet component reaches the first snap index                                                                                                                                                                                                             |
+| onBackDropPress            | no       | function  | Called when press the backdrop                                                                                                                                                                                                                                                 |
 
 ## Methods
 
