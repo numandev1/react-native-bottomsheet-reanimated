@@ -103,6 +103,7 @@ class BottomPanel extends Component {
       bodyStyle,
       renderTip = true,
       onBackDropPress,
+      backDropTransparent = false,
     } = this.props;
     let { snapPoints, initialPosition = { y: 0 } } = this.props;
     snapPoints = getSnapPoints(snapPoints);
@@ -116,7 +117,7 @@ class BottomPanel extends Component {
             pointerEvents={!isBottomSheetDismissed ? 'auto' : 'box-none'}
             style={[
               styles.panelContainer,
-              {
+              !backDropTransparent && {
                 backgroundColor: backDropColor,
                 opacity: isAnimatedYFromParent
                   ? animatedValueY.interpolate({
