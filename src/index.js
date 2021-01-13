@@ -37,7 +37,7 @@ const getInitialPosition = (snapPoint) => {
 class BottomPanel extends Component {
   constructor(props) {
     super(props);
-    this._deltaY = new Animated.Value(Screen.height);
+    this._deltaY = new Animated.Value(500);
     this.state = {
       snapToIndex: 0,
       points: 100,
@@ -104,11 +104,13 @@ class BottomPanel extends Component {
       renderTip = true,
       onBackDropPress,
       backDropTransparent = false,
+      disableTopDrag = false,
     } = this.props;
     let { snapPoints, initialPosition = { y: 0 } } = this.props;
     snapPoints = getSnapPoints(snapPoints);
     initialPosition = getInitialPosition(initialPosition);
     const { isDismissWithPress, isBottomSheetDismissed } = this.state;
+    const boundariesTopValue = disableTopDrag ? 300 : -300;
     return (
       <View style={styles.panelContainer} pointerEvents={'box-none'}>
         {/* Backdrop */}
@@ -141,7 +143,10 @@ class BottomPanel extends Component {
           ref={(ref) => (this.sheetRef = ref)}
           snapPoints={snapPoints}
           initialPosition={initialPosition}
-          boundaries={{ top: isModal ? 0 : -300, bounce: isModal ? 0 : 0.5 }}
+          boundaries={{
+            top: isModal ? 0 : boundariesTopValue,
+            bounce: isModal ? 0 : 0.5,
+          }}
           animatedValueY={isAnimatedYFromParent ? animatedValueY : this._deltaY}
           onSnap={this.onDrawerSnap}
         >
