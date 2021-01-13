@@ -146,6 +146,7 @@ class BottomPanel extends Component {
         >
           {!isModal && isDismissWithPress && !isBottomSheetDismissed && (
             <TouchableWithoutFeedback
+              disabled={isBackDrop ? false : true}
               onPress={() => {
                 this.dismissBottomSheet();
                 onBackDropPress && onBackDropPress();
@@ -208,7 +209,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   panel: {
-    height: Screen.height + 100,
+    height: Screen.height + 300,
   },
   modal: {
     height: Screen.height + 300,
