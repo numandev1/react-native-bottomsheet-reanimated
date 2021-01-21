@@ -22,7 +22,7 @@ class App extends Component {
   }
 
   onOpenBottomSheetHandler = (index) => {
-    this.sheetRef.current.snapTo(index);
+    this.sheetRef.snapTo(index);
   };
 
   render() {
