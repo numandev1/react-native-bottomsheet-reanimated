@@ -37,7 +37,7 @@ const getInitialPosition = (snapPoint) => {
 class BottomPanel extends Component {
   constructor(props) {
     super(props);
-    this._deltaY = new Animated.Value(500);
+    this._deltaY = new Animated.Value(Screen.height);
     this.state = {
       snapToIndex: 0,
       points: 100,
@@ -101,7 +101,6 @@ class BottomPanel extends Component {
       tipStyle,
       headerStyle,
       bodyStyle,
-      renderTip = true,
       onBackDropPress,
       backDropTransparent = false,
       disableTopDrag = false,
@@ -111,6 +110,7 @@ class BottomPanel extends Component {
     initialPosition = getInitialPosition(initialPosition);
     const { isDismissWithPress, isBottomSheetDismissed } = this.state;
     const boundariesTopValue = disableTopDrag ? 300 : -300;
+
     return (
       <View style={styles.panelContainer} pointerEvents={'box-none'}>
         {/* Backdrop */}
@@ -168,26 +168,24 @@ class BottomPanel extends Component {
           )}
 
           <View
-            style={
-              renderTip && [
-                isModal ? styles.modal : styles.panel,
-                { backgroundColor: bottomSheerColor },
-                isRoundBorderWithTipHeader
-                  ? {
-                      backgroundColor: bottomSheerColor,
-                      borderTopLeftRadius: 12,
-                      borderTopRightRadius: 12,
-                      shadowColor: '#000000',
-                      shadowOffset: { width: 0, height: 0 },
-                      shadowRadius: 5,
-                      shadowOpacity: 0.4,
-                    }
-                  : {},
-                containerStyle,
-              ]
-            }
+            style={[
+              isModal ? styles.modal : styles.panel,
+              { backgroundColor: bottomSheerColor },
+              isRoundBorderWithTipHeader
+                ? {
+                    backgroundColor: bottomSheerColor,
+                    borderTopLeftRadius: 12,
+                    borderTopRightRadius: 12,
+                    shadowColor: '#000000',
+                    shadowOffset: { width: 0, height: 0 },
+                    shadowRadius: 5,
+                    shadowOpacity: 0.4,
+                  }
+                : {},
+              containerStyle,
+            ]}
           >
-            {!isModal && isRoundBorderWithTipHeader && renderTip && (
+            {!isModal && isRoundBorderWithTipHeader && (
               <View style={[styles.panelHandle, tipStyle]} />
             )}
             {!isModal && (
