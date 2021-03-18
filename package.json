@@ -1,6 +1,6 @@
 {
   "name": "react-native-bottomsheet-reanimated",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "react-native-bottomsheet-reanimated made with reanimted and interactable",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -56,24 +56,26 @@
     "eslint": "^7.2.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.3",
-    "husky": "^4.2.5",
+    "husky": "4.3.7",
     "jest": "^26.0.1",
     "pod-install": "^0.1.0",
     "prettier": "^2.0.5",
+    "pretty-quick": "^3.1.0",
     "react": "16.11.0",
     "react-native": "0.62.2",
-    "release-it": "^13.5.8",
-    "typescript": "^3.8.3",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-interactable-reanimated": "^0.0.8",
-    "react-native-reanimated": "^1.9.0"
+    "react-native-reanimated": "^1.9.0",
+    "release-it": "^13.5.8",
+    "typescript": "^3.8.3",
+    "lint-staged": "^10.5.4"
   },
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
     "react-native-gesture-handler": ">=1.6.1",
-    "react-native-reanimated": ">=1.8.0",
-    "react-native-interactable-reanimated": ">=0.0.8"
+    "react-native-interactable-reanimated": ">=0.0.8",
+    "react-native-reanimated": ">=1.8.0"
   },
   "jest": {
     "preset": "react-native",
@@ -84,8 +86,13 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint && yarn typescript"
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.(js|jsx|ts|tsx)": [
+      "pretty-quick --staged"
+    ]
   },
   "commitlint": {
     "extends": [
@@ -127,7 +134,10 @@
       ]
     }
   },
-  "eslintIgnore": ["node_modules/", "lib/"],
+  "eslintIgnore": [
+    "node_modules/",
+    "lib/"
+  ],
   "prettier": {
     "quoteProps": "consistent",
     "singleQuote": true,
@@ -138,6 +148,10 @@
   "@react-native-community/bob": {
     "source": "src",
     "output": "lib",
-    "targets": ["commonjs", "module", "typescript"]
+    "targets": [
+      "commonjs",
+      "module",
+      "typescript"
+    ]
   }
 }
