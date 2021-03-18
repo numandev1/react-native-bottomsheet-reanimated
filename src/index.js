@@ -87,6 +87,7 @@ class BottomPanel extends Component {
       body,
       isBackDrop = false,
       isModal,
+      dragEnabled=true,
       isAnimatedYFromParent,
       animatedValueY,
       containerStyle,
@@ -125,7 +126,7 @@ class BottomPanel extends Component {
         )}
 
         <Interactable.View
-          dragEnabled={isModal ? false : true}
+          dragEnabled={isModal ? false : dragEnabled}
           verticalOnly={true}
           ref="bottomPanel"
           snapPoints={snapPoints}

@@ -86,7 +86,7 @@ class Example extends React.Component {
 | tipStyle                   | no       |           | for change style of tip. it is dependted on `isRoundBorderWithTipHeader`.                                                                                                                                                                                                      |
 | headerStyle                | no       |           | for change style of header.                                                                                                                                                                                                                                                    |
 | bodyStyle                  | no       |           | for change style of body.                                                                                                                                                                                                                                                      |
-
+| dragEnabled                  | no       |     true      | for enable/disable drag                                                                                                                                                                                                                                                      |
 ## Methods
 
 ### `snapTo(index)`
