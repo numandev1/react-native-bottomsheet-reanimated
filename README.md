@@ -9,7 +9,6 @@ Usable with Expo with no extra native dependencies!
 | ![](media/bottom1.gif) | ![](media/bottom2.gif) | ![](media/bottom3.gif) |
 | :--------------------: | :--------------------: | :--------------------: |
 
-
 ## Installation
 
 Open a Terminal in the project root and run:
@@ -86,7 +85,9 @@ class Example extends React.Component {
 | tipStyle                   | no       |           | for change style of tip. it is dependted on `isRoundBorderWithTipHeader`.                                                                                                                                                                                                      |
 | headerStyle                | no       |           | for change style of header.                                                                                                                                                                                                                                                    |
 | bodyStyle                  | no       |           | for change style of body.                                                                                                                                                                                                                                                      |
-| dragEnabled                  | no       |     true      | for enable/disable drag                                                                                                                                                                                                                                                      |
+| dragEnabled                | no       | true      | for enable/disable drag                                                                                                                                                                                                                                                        |
+| tipHeaderRadius            | no       | 12        | for tip header border radius                                                                                                                                                                                                                                                   |
+
 ## Methods
 
 ### `snapTo(index)`

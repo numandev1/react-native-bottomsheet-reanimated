@@ -83,11 +83,12 @@ class BottomPanel extends Component {
       bottomSheerColor = '#FFFFFF',
       backDropColor = '#000000',
       isRoundBorderWithTipHeader = false,
+      tipHeaderRadius = 12,
       header,
       body,
       isBackDrop = false,
       isModal,
-      dragEnabled=true,
+      dragEnabled = true,
       isAnimatedYFromParent,
       animatedValueY,
       containerStyle,
@@ -154,15 +155,19 @@ class BottomPanel extends Component {
               isModal ? styles.modal : styles.panel,
               { backgroundColor: bottomSheerColor },
               isRoundBorderWithTipHeader
-                ? {
-                    backgroundColor: '#f7f5eee8',
-                    borderTopLeftRadius: 12,
-                    borderTopRightRadius: 12,
-                    shadowColor: '#000000',
-                    shadowOffset: { width: 0, height: 0 },
-                    shadowRadius: 5,
-                    shadowOpacity: 0.4,
-                  }
+                ? [
+                    {
+                      backgroundColor: '#f7f5eee8',
+                      shadowColor: '#000000',
+                      shadowOffset: { width: 0, height: 0 },
+                      shadowRadius: 5,
+                      shadowOpacity: 0.4,
+                    },
+                    {
+                      borderTopLeftRadius: tipHeaderRadius,
+                      borderTopRightRadius: tipHeaderRadius,
+                    },
+                  ]
                 : {},
               containerStyle,
             ]}
