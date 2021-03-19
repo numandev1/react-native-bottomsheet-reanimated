@@ -67,6 +67,7 @@ class BottomPanel extends Component {
     let index = snapPoints.findIndex((x) => x === 0 || x === '0%');
     if (index !== -1) {
       this.refs.bottomPanel.snapTo({ index });
+      this.props.onClose && this.props.onClose();
     }
   };
 

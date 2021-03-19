@@ -87,6 +87,7 @@ class Example extends React.Component {
 | bodyStyle                  | no       |           | for change style of body.                                                                                                                                                                                                                                                      |
 | dragEnabled                | no       | true      | for enable/disable drag                                                                                                                                                                                                                                                        |
 | tipHeaderRadius            | no       | 12        | for tip header border radius                                                                                                                                                                                                                                                   |
+| onClose                    | no       |           | call when bottomsheet close                                                                                                                                                                                                                                                    |
 
 ## Methods
 
