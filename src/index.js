@@ -52,14 +52,14 @@ class BottomPanel extends Component {
 
   onDrawerSnap = (snap) => {
     const { snapPoints } = this.props;
-    if (
-      snapPoints[snap.nativeEvent.index] === 0 ||
-      snapPoints[snap.nativeEvent.index] === '0%'
-    ) {
+    const index = snap.nativeEvent.index;
+    const value = snapPoints[index];
+    if (value === 0 || value === '0%') {
       this.setState({ isBottomSheetDismissed: true });
     } else {
       this.setState({ isBottomSheetDismissed: false });
     }
+    this.props.onChangeSnap && this.props.onChangeSnap({ index, value });
   };
 
   dismissBottomSheet = () => {
