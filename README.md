@@ -14,7 +14,7 @@ Usable with Expo with no extra native dependencies!
 Open a Terminal in the project root and run:
 
 ```sh
-yarn add react-native-bottomsheet-reanimated
+yarn add react-native-bottomsheet-reanimated react-native-interactable-reanimated
 ```
 
 or if you use `npm`:
