@@ -93,6 +93,7 @@ class BottomPanel extends Component {
       isAnimatedYFromParent,
       animatedValueY,
       containerStyle,
+      bodyContainerStyle = {},
       tipStyle,
       headerStyle,
       bodyStyle,
@@ -173,13 +174,20 @@ class BottomPanel extends Component {
               containerStyle,
             ]}
           >
-            {!isModal && isRoundBorderWithTipHeader && (
-              <View style={[styles.panelHandle, tipStyle]} />
-            )}
-            {!isModal && (
-              <View style={[styles.panelHeader, headerStyle]}>{header}</View>
-            )}
-            <View style={bodyStyle}>{body}</View>
+            <View
+              style={[
+                isModal ? styles.modal : styles.panel,
+                bodyContainerStyle,
+              ]}
+            >
+              {!isModal && isRoundBorderWithTipHeader && (
+                <View style={[styles.panelHandle, tipStyle]} />
+              )}
+              {!isModal && (
+                <View style={[styles.panelHeader, headerStyle]}>{header}</View>
+              )}
+              <View style={bodyStyle}>{body}</View>
+            </View>
           </View>
         </Interactable.View>
       </View>
