@@ -13,10 +13,9 @@ import {
   Keyboard,
   StyleProp,
   ViewStyle,
-  Alert,
 } from 'react-native';
 
-import Animated from 'react-native-reanimated';
+import Animated, { Extrapolate } from 'react-native-reanimated';
 import Interactable from 'react-native-interactable-reanimated';
 
 const Screen = {
@@ -26,7 +25,7 @@ const Screen = {
 
 type Porps = {
   isBackDropDismissByPress: boolean;
-  initialPosition: object;
+  initialPosition: object | any;
   onChangeSnap: (data: object) => void;
   snapPoints: Array<any>;
   bottomSheerColor: string;
@@ -95,7 +94,6 @@ const Index = forwardRef(
       if (value === 0 || value === '0%') {
         setIsBottomSheetDismissed(true);
       } else {
-        alert('ok');
         setIsBottomSheetDismissed(false);
       }
       onChangeSnap && onChangeSnap({ index, value });
@@ -137,12 +135,12 @@ const Index = forwardRef(
                   ? animatedValueY.interpolate({
                       inputRange: [0, Screen.height - 100],
                       outputRange: [1, 0],
-                      extrapolateRight: 'clamp',
+                      extrapolateRight: Extrapolate.CLAMP,
                     })
                   : _deltaY.interpolate({
                       inputRange: [0, Screen.height - 100],
                       outputRange: [1, 0],
-                      extrapolateRight: 'clamp',
+                      extrapolateRight: Extrapolate.CLAMP,
                     }),
               },
             ]}
