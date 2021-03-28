@@ -13,6 +13,7 @@ import {
   Keyboard,
   StyleProp,
   ViewStyle,
+  Alert,
 } from 'react-native';
 
 import Animated from 'react-native-reanimated';
@@ -21,26 +22,6 @@ import Interactable from 'react-native-interactable-reanimated';
 const Screen = {
   width: Dimensions.get('window').width,
   height: Dimensions.get('window').height,
-};
-
-const getSnapPoints = (snapPoints: any) => {
-  return snapPoints.map((snapItem: any) => {
-    if (typeof snapItem === 'string') {
-      const parentValue: any = snapItem.split('%')[0];
-      snapItem = (Screen.height / 100) * parentValue;
-    }
-    const snapObject = { y: Screen.height - snapItem };
-    return snapObject;
-  });
-};
-
-const getInitialPosition = (snapPoint: any) => {
-  if (typeof snapPoint === 'string') {
-    const parentValue: any = snapPoint.split('%')[0];
-    snapPoint = (Screen.height / 100) * parentValue;
-  }
-  const snapObject = { y: Screen.height - snapPoint };
-  return snapObject;
 };
 
 type Porps = {
@@ -65,8 +46,8 @@ type Porps = {
   headerStyle: StyleProp<ViewStyle>;
   bodyStyle: StyleProp<ViewStyle>;
   onClose: () => void;
+  bounce: number;
 };
-const _deltaY = new Animated.Value(Screen.height);
 
 const Index = forwardRef(
   (
@@ -92,10 +73,12 @@ const Index = forwardRef(
       headerStyle,
       bodyStyle,
       onClose,
+      bounce = 0.5,
     }: Porps,
     ref
   ) => {
     const bottomPanel = useRef<any>();
+    const _deltaY = new Animated.Value(Screen.height);
     const _snapPoints = getSnapPoints(snapPoints);
     const _initialPosition = getInitialPosition(initialPosition);
     const isDismissWithPress = isBackDropDismissByPress
@@ -112,6 +95,7 @@ const Index = forwardRef(
       if (value === 0 || value === '0%') {
         setIsBottomSheetDismissed(true);
       } else {
+        alert('ok');
         setIsBottomSheetDismissed(false);
       }
       onChangeSnap && onChangeSnap({ index, value });
@@ -171,7 +155,7 @@ const Index = forwardRef(
           ref={bottomPanel}
           snapPoints={_snapPoints}
           initialPosition={_initialPosition}
-          boundaries={{ top: isModal ? 0 : -300, bounce: isModal ? 0 : 0.5 }}
+          boundaries={{ top: isModal ? 0 : -300, bounce: bounce }}
           animatedValueY={isAnimatedYFromParent ? animatedValueY : _deltaY}
           onSnap={onDrawerSnap}
         >
@@ -264,3 +248,23 @@ const styles = StyleSheet.create({
     right: 0,
   },
 });
+
+const getSnapPoints = (snapPoints: any) => {
+  return snapPoints.map((snapItem: any) => {
+    if (typeof snapItem === 'string') {
+      const parentValue: any = snapItem.split('%')[0];
+      snapItem = (Screen.height / 100) * parentValue;
+    }
+    const snapObject = { y: Screen.height - snapItem };
+    return snapObject;
+  });
+};
+
+const getInitialPosition = (snapPoint: any) => {
+  if (typeof snapPoint === 'string') {
+    const parentValue: any = snapPoint.split('%')[0];
+    snapPoint = (Screen.height / 100) * parentValue;
+  }
+  const snapObject = { y: Screen.height - snapPoint };
+  return snapObject;
+};
