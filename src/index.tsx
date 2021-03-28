@@ -1,11 +1,20 @@
-import React, { Component } from 'react';
+import React, {
+  useState,
+  useRef,
+  forwardRef,
+  useImperativeHandle,
+} from 'react';
+
 import {
   View,
   StyleSheet,
   Dimensions,
   TouchableWithoutFeedback,
   Keyboard,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
+
 import Animated from 'react-native-reanimated';
 import Interactable from 'react-native-interactable-reanimated';
 
@@ -14,10 +23,10 @@ const Screen = {
   height: Dimensions.get('window').height,
 };
 
-const getSnapPoints = (snapPoints) => {
-  return snapPoints.map((snapItem) => {
+const getSnapPoints = (snapPoints: any) => {
+  return snapPoints.map((snapItem: any) => {
     if (typeof snapItem === 'string') {
-      const parentValue = snapItem.split('%')[0];
+      const parentValue: any = snapItem.split('%')[0];
       snapItem = (Screen.height / 100) * parentValue;
     }
     const snapObject = { y: Screen.height - snapItem };
@@ -25,62 +34,47 @@ const getSnapPoints = (snapPoints) => {
   });
 };
 
-const getInitialPosition = (snapPoint) => {
+const getInitialPosition = (snapPoint: any) => {
   if (typeof snapPoint === 'string') {
-    const parentValue = snapPoint.split('%')[0];
+    const parentValue: any = snapPoint.split('%')[0];
     snapPoint = (Screen.height / 100) * parentValue;
   }
   const snapObject = { y: Screen.height - snapPoint };
   return snapObject;
 };
 
-class BottomPanel extends Component {
-  constructor(props) {
-    super(props);
-    this._deltaY = new Animated.Value(Screen.height);
-    this.state = {
-      snapToIndex: 0,
-      points: 100,
-      scrollValueY: new Animated.Value(0),
-      isDismissWithPress: props.isBackDropDismissByPress
-        ? props.isBackDropDismissByPress
-        : false,
-      isBottomSheetDismissed:
-        props.initialPosition === 0 || props.initialPosition === '0%',
-    };
-  }
+type Porps = {
+  isBackDropDismissByPress: boolean;
+  initialPosition: object;
+  onChangeSnap: (data: object) => void;
+  snapPoints: Array<any>;
+  bottomSheerColor: string;
+  backDropColor: string;
+  isRoundBorderWithTipHeader: boolean;
+  tipHeaderRadius: number;
+  header: React.ReactNode;
+  body: React.ReactNode;
+  isBackDrop: boolean;
+  isModal: boolean;
+  dragEnabled: boolean;
+  isAnimatedYFromParent: boolean;
+  animatedValueY: any;
+  containerStyle: StyleProp<ViewStyle>;
+  bodyContainerStyle: StyleProp<ViewStyle>;
+  tipStyle: StyleProp<ViewStyle>;
+  headerStyle: StyleProp<ViewStyle>;
+  bodyStyle: StyleProp<ViewStyle>;
+  onClose: () => void;
+};
+const _deltaY = new Animated.Value(Screen.height);
 
-  onDrawerSnap = (snap) => {
-    const { snapPoints } = this.props;
-    const index = snap.nativeEvent.index;
-    const value = snapPoints[index];
-    if (value === 0 || value === '0%') {
-      this.setState({ isBottomSheetDismissed: true });
-    } else {
-      this.setState({ isBottomSheetDismissed: false });
-    }
-    this.props.onChangeSnap && this.props.onChangeSnap({ index, value });
-  };
-
-  dismissBottomSheet = () => {
-    const { snapPoints } = this.props;
-    let index = snapPoints.findIndex((x) => x === 0 || x === '0%');
-    if (index !== -1) {
-      this.refs.bottomPanel.snapTo({ index });
-      this.props.onClose && this.props.onClose();
-    }
-  };
-
-  snapTo = (index) => {
-    const { snapPoints } = this.props;
-    if (snapPoints.findIndex((x) => x === 0 || x === '0%') !== -1) {
-      Keyboard.dismiss();
-    }
-    this.refs.bottomPanel.snapTo({ index });
-  };
-
-  render() {
-    const {
+const Index = forwardRef(
+  (
+    {
+      isBackDropDismissByPress,
+      initialPosition = { y: 0 },
+      onChangeSnap,
+      snapPoints,
       bottomSheerColor = '#FFFFFF',
       backDropColor = '#000000',
       isRoundBorderWithTipHeader = false,
@@ -97,11 +91,54 @@ class BottomPanel extends Component {
       tipStyle,
       headerStyle,
       bodyStyle,
-    } = this.props;
-    let { snapPoints, initialPosition = { y: 0 } } = this.props;
-    snapPoints = getSnapPoints(snapPoints);
-    initialPosition = getInitialPosition(initialPosition);
-    const { isDismissWithPress, isBottomSheetDismissed } = this.state;
+      onClose,
+    }: Porps,
+    ref
+  ) => {
+    const bottomPanel = useRef<any>();
+    const _snapPoints = getSnapPoints(snapPoints);
+    const _initialPosition = getInitialPosition(initialPosition);
+    const isDismissWithPress = isBackDropDismissByPress
+      ? isBackDropDismissByPress
+      : false;
+    const [
+      isBottomSheetDismissed,
+      setIsBottomSheetDismissed,
+    ] = useState<boolean>(initialPosition === 0 || initialPosition === '0%');
+
+    const onDrawerSnap = (snap: any) => {
+      const index = snap.nativeEvent.index;
+      const value = snapPoints[index];
+      if (value === 0 || value === '0%') {
+        setIsBottomSheetDismissed(true);
+      } else {
+        setIsBottomSheetDismissed(false);
+      }
+      onChangeSnap && onChangeSnap({ index, value });
+    };
+
+    const dismissBottomSheet = () => {
+      let index = snapPoints.findIndex(
+        (x: number | string) => x === 0 || x === '0%'
+      );
+      if (index !== -1) {
+        bottomPanel.current.snapTo({ index });
+        onClose && onClose();
+      }
+    };
+
+    const snapTo = (index: number) => {
+      if (snapPoints.findIndex((x) => x === 0 || x === '0%') !== -1) {
+        Keyboard.dismiss();
+      }
+      bottomPanel.current.snapTo({ index });
+    };
+
+    useImperativeHandle(ref, () => ({
+      snapTo,
+      dismissBottomSheet,
+    }));
+
     return (
       <View style={styles.panelContainer} pointerEvents={'box-none'}>
         {/* Backdrop */}
@@ -118,7 +155,7 @@ class BottomPanel extends Component {
                       outputRange: [1, 0],
                       extrapolateRight: 'clamp',
                     })
-                  : this._deltaY.interpolate({
+                  : _deltaY.interpolate({
                       inputRange: [0, Screen.height - 100],
                       outputRange: [1, 0],
                       extrapolateRight: 'clamp',
@@ -131,16 +168,16 @@ class BottomPanel extends Component {
         <Interactable.View
           dragEnabled={isModal ? false : dragEnabled}
           verticalOnly={true}
-          ref="bottomPanel"
-          snapPoints={snapPoints}
-          initialPosition={initialPosition}
+          ref={bottomPanel}
+          snapPoints={_snapPoints}
+          initialPosition={_initialPosition}
           boundaries={{ top: isModal ? 0 : -300, bounce: isModal ? 0 : 0.5 }}
-          animatedValueY={isAnimatedYFromParent ? animatedValueY : this._deltaY}
-          onSnap={this.onDrawerSnap}
+          animatedValueY={isAnimatedYFromParent ? animatedValueY : _deltaY}
+          onSnap={onDrawerSnap}
         >
           {!isModal && isDismissWithPress && !isBottomSheetDismissed && (
             <TouchableWithoutFeedback
-              onPress={this.dismissBottomSheet}
+              onPress={dismissBottomSheet}
               disabled={isBackDrop ? false : true}
             >
               <View
@@ -193,7 +230,9 @@ class BottomPanel extends Component {
       </View>
     );
   }
-}
+);
+
+export default Index;
 
 const styles = StyleSheet.create({
   container: {
@@ -225,5 +264,3 @@ const styles = StyleSheet.create({
     right: 0,
   },
 });
-
-export default BottomPanel;
