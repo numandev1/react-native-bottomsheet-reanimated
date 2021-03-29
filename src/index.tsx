@@ -22,7 +22,6 @@ const Screen = {
   width: Dimensions.get('window').width,
   height: Dimensions.get('window').height,
 };
-
 type Porps = {
   isBackDropDismissByPress: boolean;
   initialPosition: object | any;
@@ -47,7 +46,7 @@ type Porps = {
   onClose: () => void;
   bounce: number;
 };
-
+const _deltaY = new Animated.Value(Screen.height);
 const Index = forwardRef(
   (
     {
@@ -77,7 +76,6 @@ const Index = forwardRef(
     ref
   ) => {
     const bottomPanel = useRef<any>();
-    const _deltaY = new Animated.Value(Screen.height);
     const _snapPoints = getSnapPoints(snapPoints);
     const _initialPosition = getInitialPosition(initialPosition);
     const isDismissWithPress = isBackDropDismissByPress
