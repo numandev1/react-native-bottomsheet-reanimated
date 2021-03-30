@@ -91,6 +91,7 @@ const Index = forwardRef(
       const value = snapPoints[index];
       if (value === 0 || value === '0%') {
         setIsBottomSheetDismissed(true);
+        onClose && onClose();
       } else {
         setIsBottomSheetDismissed(false);
       }
