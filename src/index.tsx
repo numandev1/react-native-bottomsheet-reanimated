@@ -46,7 +46,6 @@ type Porps = {
   onClose: () => void;
   bounce: number;
 };
-const _deltaY = new Animated.Value(Screen.height);
 const Index = forwardRef(
   (
     {
@@ -75,6 +74,7 @@ const Index = forwardRef(
     }: Porps,
     ref
   ) => {
+    const [_deltaY] = useState(new Animated.Value(Screen.height));
     const bottomPanel = useRef<any>();
     const _snapPoints = getSnapPoints(snapPoints);
     const _initialPosition = getInitialPosition(initialPosition);
