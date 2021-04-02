@@ -113,6 +113,8 @@ const Index = forwardRef(
         Keyboard.dismiss();
       }
       bottomPanel.current.snapTo({ index });
+      const value = snapPoints[index];
+      onChangeSnap && onChangeSnap({ index, value });
     };
 
     useImperativeHandle(ref, () => ({
