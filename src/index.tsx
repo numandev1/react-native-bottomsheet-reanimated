@@ -9,7 +9,6 @@ import {
   View,
   StyleSheet,
   Dimensions,
-  TouchableWithoutFeedback,
   Keyboard,
   StyleProp,
   ViewStyle,
@@ -17,6 +16,7 @@ import {
 
 import Animated, { Extrapolate } from 'react-native-reanimated';
 import Interactable from 'react-native-interactable-reanimated';
+import { TapGestureHandler } from 'react-native-gesture-handler';
 
 const Screen = {
   width: Dimensions.get('window').width,
@@ -159,9 +159,9 @@ const Index = forwardRef(
           onSnap={onDrawerSnap}
         >
           {!isModal && isDismissWithPress && !isBottomSheetDismissed && (
-            <TouchableWithoutFeedback
-              onPress={dismissBottomSheet}
-              disabled={isBackDrop ? false : true}
+            <TapGestureHandler
+              enabled={isBackDrop}
+              onActivated={dismissBottomSheet}
             >
               <View
                 style={{
@@ -169,7 +169,7 @@ const Index = forwardRef(
                   marginTop: -Screen.height,
                 }}
               />
-            </TouchableWithoutFeedback>
+            </TapGestureHandler>
           )}
 
           <View
