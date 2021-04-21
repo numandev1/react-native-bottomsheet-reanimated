@@ -3,6 +3,7 @@ import React, {
   useRef,
   forwardRef,
   useImperativeHandle,
+  useEffect,
 } from 'react';
 
 import {
@@ -17,6 +18,8 @@ import {
 import Animated, { Extrapolate } from 'react-native-reanimated';
 import Interactable from 'react-native-interactable-reanimated';
 import { TapGestureHandler } from 'react-native-gesture-handler';
+import { useKeyboard } from './Hooks';
+import { normalize } from './utils';
 
 const Screen = {
   width: Dimensions.get('window').width,
@@ -45,6 +48,7 @@ type Porps = {
   bodyStyle: StyleProp<ViewStyle>;
   onClose: () => void;
   bounce: number;
+  keyboardAware?: boolean;
 };
 const Index = forwardRef(
   (
@@ -71,9 +75,12 @@ const Index = forwardRef(
       bodyStyle,
       onClose,
       bounce = 0.5,
+      keyboardAware = false,
     }: Porps,
     ref
   ) => {
+    const [keyboardHeight] = useKeyboard(keyboardAware);
+    const [currentSnap, setCurrentSnap] = useState(initialPosition);
     const [_deltaY] = useState(new Animated.Value(Screen.height));
     const bottomPanel = useRef<any>();
     const _snapPoints = getSnapPoints(snapPoints);
@@ -89,6 +96,7 @@ const Index = forwardRef(
     const onDrawerSnap = (snap: any) => {
       const index = snap.nativeEvent.index;
       const value = snapPoints[index];
+      setCurrentSnap(value); //
       if (value === 0 || value === '0%') {
         setIsBottomSheetDismissed(true);
         onClose && onClose();
@@ -106,6 +114,7 @@ const Index = forwardRef(
         bottomPanel.current.snapTo({ index });
         onClose && onClose();
       }
+      Keyboard.dismiss();
     };
 
     const snapTo = (index: number) => {
@@ -121,6 +130,31 @@ const Index = forwardRef(
       snapTo,
       dismissBottomSheet,
     }));
+
+    useEffect(() => {
+      if (keyboardAware) {
+        const currentSnapHeight = normalize(currentSnap);
+        if (keyboardHeight) {
+          const newSnapHeight = currentSnapHeight + keyboardHeight;
+          if (newSnapHeight > Screen.height) {
+            bottomPanel.current.snapToPosition({
+              x: 0,
+              y: 0,
+            });
+          } else {
+            bottomPanel.current.snapToPosition({
+              x: 0,
+              y: Screen.height - newSnapHeight,
+            });
+          }
+        } else {
+          bottomPanel.current.snapToPosition({
+            x: 0,
+            y: Screen.height - currentSnapHeight,
+          });
+        }
+      }
+    }, [keyboardHeight]);
 
     return (
       <View style={styles.panelContainer} pointerEvents={'box-none'}>

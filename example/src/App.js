@@ -6,6 +6,7 @@ import {
   Text,
   Dimensions,
   TouchableOpacity,
+  TextInput,
 } from 'react-native';
 
 import BottomSheet from 'react-native-bottomsheet-reanimated';
@@ -55,6 +56,7 @@ class App extends Component {
           isBackDrop={true}
           isBackDropDismissByPress={true}
           isRoundBorderWithTipHeader={true}
+          keyboardAware
           // isModal
           // containerStyle={{backgroundColor:"red"}}
           // tipStyle={{backgroundColor:"red"}}
@@ -68,6 +70,7 @@ class App extends Component {
           body={
             <View style={styles.body}>
               <Text style={styles.text}>Body</Text>
+              <TextInput style={{ width: '100%', backgroundColor: 'gray' }} />
             </View>
           }
         />

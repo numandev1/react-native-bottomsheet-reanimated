@@ -1,6 +1,6 @@
 {
   "name": "react-native-bottomsheet-reanimated",
-  "version": "0.0.35",
+  "version": "0.0.36",
   "description": "react-native-bottomsheet-reanimated made with reanimted and interactable",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -64,7 +64,7 @@
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-gesture-handler": "^1.6.1",
-    "react-native-interactable-reanimated": "^0.0.8",
+    "react-native-interactable-reanimated": "^0.0.15",
     "react-native-reanimated": "^1.9.0",
     "release-it": "^13.5.8",
     "typescript": "^3.8.3",
