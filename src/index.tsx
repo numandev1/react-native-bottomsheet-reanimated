@@ -51,6 +51,7 @@ type Porps = {
   bounce: number;
   keyboardAware?: boolean;
   keyboardAwareExtraSnapHeight?: number;
+  keyboardAwareDrag?: boolean;
 };
 const Index = forwardRef(
   (
@@ -80,6 +81,7 @@ const Index = forwardRef(
       bounce = 0.5,
       keyboardAware = false,
       keyboardAwareExtraSnapHeight = 0,
+      keyboardAwareDrag = false,
     }: Porps,
     ref
   ) => {
@@ -172,6 +174,17 @@ const Index = forwardRef(
       }
     }, [keyboardHeight]);
 
+    const dragHandler = () => {
+      if (dragEnabled) {
+        if (!keyboardAwareDrag && keyboardHeight > 0) {
+          return false;
+        } else {
+          return true;
+        }
+      }
+      return false;
+    };
+
     return (
       <View style={styles.panelContainer} pointerEvents={'box-none'}>
         {/* Backdrop */}
@@ -199,7 +212,7 @@ const Index = forwardRef(
         )}
 
         <Interactable.View
-          dragEnabled={isModal ? false : dragEnabled}
+          dragEnabled={isModal ? false : dragHandler()}
           verticalOnly={true}
           ref={bottomPanel}
           snapPoints={_snapPoints}
