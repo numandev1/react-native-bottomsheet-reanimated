@@ -4,6 +4,7 @@ declare type Porps = {
   isBackDropDismissByPress: boolean;
   initialPosition: object | any;
   onChangeSnap: (data: object) => void;
+  onChangeKeyboardAwareSnap: (data: object) => void;
   snapPoints: Array<any>;
   bottomSheerColor: string;
   backDropColor: string;

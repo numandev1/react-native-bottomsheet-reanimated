@@ -25,7 +25,7 @@ const useKeyboard = (isEnable = true): [number] => {
       Keyboard.removeListener(keyboardShowEvent, onKeyboardWillShow);
       Keyboard.removeListener(keyboardHideEvent, onKeyboardWillHide);
     };
-  }, []);
+  }, [isEnable]);
 
   return [keyboardHeight];
 };

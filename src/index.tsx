@@ -29,6 +29,7 @@ type Porps = {
   isBackDropDismissByPress: boolean;
   initialPosition: object | any;
   onChangeSnap: (data: object) => void;
+  onChangeKeyboardAwareSnap: (data: object) => void;
   snapPoints: Array<any>;
   bottomSheerColor: string;
   backDropColor: string;
@@ -56,6 +57,7 @@ const Index = forwardRef(
       isBackDropDismissByPress,
       initialPosition = { y: 0 },
       onChangeSnap,
+      onChangeKeyboardAwareSnap,
       snapPoints,
       bottomSheerColor = '#FFFFFF',
       backDropColor = '#000000',
@@ -141,11 +143,23 @@ const Index = forwardRef(
               x: 0,
               y: 0,
             });
+            onChangeKeyboardAwareSnap &&
+              onChangeKeyboardAwareSnap({
+                previousSnap: currentSnapHeight,
+                nextSnap: 0,
+                keyboardHeight,
+              });
           } else {
             bottomPanel.current.snapToPosition({
               x: 0,
               y: Screen.height - newSnapHeight,
             });
+            onChangeKeyboardAwareSnap &&
+              onChangeKeyboardAwareSnap({
+                previousSnap: currentSnapHeight,
+                nextSnap: newSnapHeight,
+                keyboardHeight,
+              });
           }
         } else {
           bottomPanel.current.snapToPosition({
