@@ -50,6 +50,7 @@ type Porps = {
   onClose: () => void;
   bounce: number;
   keyboardAware?: boolean;
+  keyboardAwareExtraSnapHeight?: number;
 };
 const Index = forwardRef(
   (
@@ -78,6 +79,7 @@ const Index = forwardRef(
       onClose,
       bounce = 0.5,
       keyboardAware = false,
+      keyboardAwareExtraSnapHeight = 0,
     }: Porps,
     ref
   ) => {
@@ -141,7 +143,7 @@ const Index = forwardRef(
           if (newSnapHeight > Screen.height) {
             bottomPanel.current.snapToPosition({
               x: 0,
-              y: 0,
+              y: 0 - keyboardAwareExtraSnapHeight,
             });
             onChangeKeyboardAwareSnap &&
               onChangeKeyboardAwareSnap({
@@ -152,7 +154,7 @@ const Index = forwardRef(
           } else {
             bottomPanel.current.snapToPosition({
               x: 0,
-              y: Screen.height - newSnapHeight,
+              y: Screen.height - newSnapHeight - keyboardAwareExtraSnapHeight,
             });
             onChangeKeyboardAwareSnap &&
               onChangeKeyboardAwareSnap({

@@ -25,6 +25,7 @@ declare type Porps = {
   onClose: () => void;
   bounce: number;
   keyboardAware?: boolean;
+  keyboardAwareExtraSnapHeight?: number;
 };
 declare const Index: React.ForwardRefExoticComponent<
   Porps & React.RefAttributes<unknown>
