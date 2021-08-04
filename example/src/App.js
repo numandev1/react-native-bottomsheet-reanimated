@@ -56,7 +56,8 @@ class App extends Component {
           isBackDrop={true}
           isBackDropDismissByPress={true}
           isRoundBorderWithTipHeader={true}
-          keyboardAware
+          // overDrag={false}
+          // keyboardAware
           // isModal
           // containerStyle={{backgroundColor:"red"}}
           // tipStyle={{backgroundColor:"red"}}

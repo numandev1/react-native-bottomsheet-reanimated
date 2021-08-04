@@ -27,6 +27,7 @@ declare type Porps = {
   keyboardAware?: boolean;
   keyboardAwareExtraSnapHeight?: number;
   keyboardAwareDrag?: boolean;
+  overDrag?: boolean;
 };
 declare const Index: React.ForwardRefExoticComponent<
   Porps & React.RefAttributes<unknown>
