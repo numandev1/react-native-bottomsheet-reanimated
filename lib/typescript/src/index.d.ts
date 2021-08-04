@@ -11,7 +11,7 @@ declare type Porps = {
   isRoundBorderWithTipHeader: boolean;
   tipHeaderRadius: number;
   header: React.ReactNode;
-  body: React.ReactNode;
+  body: React.ReactNode | any;
   isBackDrop: boolean;
   isModal: boolean;
   dragEnabled: boolean;

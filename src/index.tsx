@@ -43,7 +43,7 @@ type Porps = {
   isRoundBorderWithTipHeader: boolean;
   tipHeaderRadius: number;
   header: React.ReactNode;
-  body: React.ReactNode;
+  body: React.ReactNode | any;
   isBackDrop: boolean;
   isModal: boolean;
   dragEnabled: boolean;
@@ -95,7 +95,11 @@ const Index = forwardRef(
     ref
   ) => {
     const [keyboardHeight] = useKeyboard(keyboardAware);
+    const [headerHeight, setHeaderHeight] = useState(0);
     const [currentSnap, setCurrentSnap] = useState(initialPosition);
+    const currentNomalizeSnap = useMemo(() => normalize(currentSnap), [
+      currentSnap,
+    ]);
     const normalizeSnap = useMemo(() => getNormalizeSnaps(snapPoints), [
       snapPoints,
     ]);
@@ -291,9 +295,21 @@ const Index = forwardRef(
                 <View style={[styles.panelHandle, tipStyle]} />
               )}
               {!isModal && (
-                <View style={[styles.panelHeader, headerStyle]}>{header}</View>
+                <View
+                  style={[styles.panelHeader, headerStyle]}
+                  onLayout={(e) => setHeaderHeight(e.nativeEvent.layout.height)}
+                >
+                  {header}
+                </View>
               )}
-              <View style={bodyStyle}>{body}</View>
+              <View style={bodyStyle}>
+                {React.cloneElement(body, {
+                  style: {
+                    ...body?.props?.style,
+                    height: currentNomalizeSnap - headerHeight,
+                  },
+                })}
+              </View>
             </View>
           </View>
         </Interactable.View>

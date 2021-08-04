@@ -1,6 +1,6 @@
 {
   "name": "react-native-bottomsheet-reanimated",
-  "version": "0.0.40",
+  "version": "0.0.41",
   "description": "react-native-bottomsheet-reanimated made with reanimted and interactable",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
