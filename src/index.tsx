@@ -27,7 +27,7 @@ import {
   getOverDragBoundries,
   getNormalizeSnaps,
 } from './utils';
-
+const OFFSET = 15;
 const Screen = {
   width: Dimensions.get('window').width,
   height: Dimensions.get('window').height,
@@ -306,7 +306,7 @@ const Index = forwardRef(
                 {React.cloneElement(body, {
                   style: {
                     ...body?.props?.style,
-                    height: currentNomalizeSnap - headerHeight,
+                    height: currentNomalizeSnap - headerHeight + OFFSET,
                   },
                 })}
               </View>
