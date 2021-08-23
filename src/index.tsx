@@ -270,7 +270,7 @@ const Index = forwardRef(
               isRoundBorderWithTipHeader
                 ? [
                     {
-                      backgroundColor: '#f7f5eee8',
+                      backgroundColor: '#FFFFFF',
                       shadowColor: '#000000',
                       shadowOffset: { width: 0, height: 0 },
                       shadowRadius: 5,
