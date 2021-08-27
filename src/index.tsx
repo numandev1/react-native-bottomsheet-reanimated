@@ -32,7 +32,7 @@ const Screen = {
   width: Dimensions.get('window').width,
   height: Dimensions.get('window').height,
 };
-type Porps = {
+export type BottomSheetProps = {
   isBackDropDismissByPress: boolean;
   initialPosition: object | any;
   onChangeSnap: (data: object) => void;
@@ -91,7 +91,7 @@ const Index = forwardRef(
       keyboardAwareExtraSnapHeight = 0,
       keyboardAwareDrag = false,
       overDrag = true,
-    }: Porps,
+    }: BottomSheetProps,
     ref
   ) => {
     const [keyboardHeight] = useKeyboard(keyboardAware);

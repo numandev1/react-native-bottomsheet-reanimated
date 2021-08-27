@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
-declare type Porps = {
+export declare type BottomSheetProps = {
   isBackDropDismissByPress: boolean;
   initialPosition: object | any;
   onChangeSnap: (data: object) => void;
@@ -30,6 +30,6 @@ declare type Porps = {
   overDrag?: boolean;
 };
 declare const Index: React.ForwardRefExoticComponent<
-  Porps & React.RefAttributes<unknown>
+  BottomSheetProps & React.RefAttributes<unknown>
 >;
 export default Index;
