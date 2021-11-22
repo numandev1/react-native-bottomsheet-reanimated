@@ -1,7 +1,14 @@
-import { useEffect, useState } from 'react';
-import { Keyboard, KeyboardEvent, Platform } from 'react-native';
+import { useEffect, useState, useRef } from 'react';
+import {
+  Keyboard,
+  KeyboardEvent,
+  Platform,
+  EmitterSubscription,
+} from 'react-native';
 
 const useKeyboard = (isEnable = true): [number] => {
+  const showSubscription = useRef<EmitterSubscription>();
+  const hideSubscription = useRef<EmitterSubscription>();
   const [keyboardHeight, setKeyboardHeight] = useState(0);
 
   function onKeyboardWillShow(e: KeyboardEvent): void {
@@ -18,13 +25,19 @@ const useKeyboard = (isEnable = true): [number] => {
         Platform.OS === 'android' ? 'keyboardDidShow' : 'keyboardWillShow';
       const keyboardHideEvent =
         Platform.OS === 'android' ? 'keyboardDidHide' : 'keyboardWillHide';
-      const showSubscription = Keyboard.addListener(keyboardShowEvent, onKeyboardWillShow);
-      const hideSubscription = Keyboard.addListener(keyboardHideEvent, onKeyboardWillHide);
-      return (): void => {
-        showSubscription.remove();
-        hideSubscription.remove();
-      };
+      showSubscription.current = Keyboard.addListener(
+        keyboardShowEvent,
+        onKeyboardWillShow
+      );
+      hideSubscription.current = Keyboard.addListener(
+        keyboardHideEvent,
+        onKeyboardWillHide
+      );
     }
+    return (): void => {
+      showSubscription.current?.remove();
+      hideSubscription.current?.remove();
+    };
   }, [isEnable]);
 
   return [keyboardHeight];
