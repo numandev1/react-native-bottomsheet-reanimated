@@ -13,18 +13,18 @@ const useKeyboard = (isEnable = true): [number] => {
   }
 
   useEffect(() => {
-    const keyboardShowEvent =
-      Platform.OS === 'android' ? 'keyboardDidShow' : 'keyboardWillShow';
-    const keyboardHideEvent =
-      Platform.OS === 'android' ? 'keyboardDidHide' : 'keyboardWillHide';
     if (isEnable) {
-      Keyboard.addListener(keyboardShowEvent, onKeyboardWillShow);
-      Keyboard.addListener(keyboardHideEvent, onKeyboardWillHide);
+      const keyboardShowEvent =
+        Platform.OS === 'android' ? 'keyboardDidShow' : 'keyboardWillShow';
+      const keyboardHideEvent =
+        Platform.OS === 'android' ? 'keyboardDidHide' : 'keyboardWillHide';
+      const showSubscription = Keyboard.addListener(keyboardShowEvent, onKeyboardWillShow);
+      const hideSubscription = Keyboard.addListener(keyboardHideEvent, onKeyboardWillHide);
+      return (): void => {
+        showSubscription.remove();
+        hideSubscription.remove();
+      };
     }
-    return (): void => {
-      Keyboard.removeListener(keyboardShowEvent, onKeyboardWillShow);
-      Keyboard.removeListener(keyboardHideEvent, onKeyboardWillHide);
-    };
   }, [isEnable]);
 
   return [keyboardHeight];
