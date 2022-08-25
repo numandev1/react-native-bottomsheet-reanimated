@@ -3,6 +3,8 @@
 <a href="https://www.buymeacoffee.com/numan.dev" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
 ---
+| :warning: IMPORTANT: This Library has been deprecated in favor of [react-native-bottom-sheet](https://github.com/gorhom/react-native-bottom-sheet) because this Library is using Reanimated V1 |
+| --- |
 
 # react-native-bottomsheet-reanimated
 
