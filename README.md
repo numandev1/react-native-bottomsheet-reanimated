@@ -1,6 +1,13 @@
 ### Would you like to support me?
 
+<div align="center">
+<a href="https://github.com/numandev1?tab=followers">
+    <img src="https://img.shields.io/github/followers/numandev1?label=Follow%20%40numandev1&style=social" height="36" />
+</a>
+<a href="https://www.youtube.com/channel/UCYCUspfN7ZevgCj3W5GlFAw"><img src="https://img.shields.io/youtube/channel/subscribers/UCYCUspfN7ZevgCj3W5GlFAw?style=social" height="36" /><a/>
+</br>
 <a href="https://www.buymeacoffee.com/numan.dev" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+</div>
 
 ---
 | :warning: IMPORTANT: This Library has been deprecated in favor of [react-native-bottom-sheet](https://github.com/gorhom/react-native-bottom-sheet) because this Library is using Reanimated V1 |
@@ -139,7 +146,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/nomi9995"><img src="https://avatars3.githubusercontent.com/u/36044436?s=460&u=c7471cd9ccec793c7a0fccc7db475a577ff7969d&v=4" width="100px;" alt="Numan"/><br /><sub><b>Numan</b></sub></a><br /><a href="#infra-Numan" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/nomi9995/react-native-bottomsheet-reanimated/commits?author=nomi9995" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/numandev1"><img src="https://avatars3.githubusercontent.com/u/36044436?s=460&u=c7471cd9ccec793c7a0fccc7db475a577ff7969d&v=4" width="100px;" alt="Numan"/><br /><sub><b>Numan</b></sub></a><br /><a href="#infra-Numan" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/numandev1/react-native-bottomsheet-reanimated/commits?author=numandev1" title="Code">💻</a></td>
   </tr>
 </table>
 

@@ -37,13 +37,16 @@
     "handler",
     "react-native-bottomsheet-reanimated"
   ],
-  "repository": "https://github.com/nomi9995/react-native-bottomsheet-reanimated",
-  "author": "Muhammad Numan <muhammadnuman70@gmail.com> (https://github.com/nomi9995)",
+  "repository": "https://github.com/numandev1/react-native-bottomsheet-reanimated",
+  "author": "Muhammad Numan <muhammadnuman70@gmail.com> (https://github.com/numandev1)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nomi9995/react-native-bottomsheet-reanimated/issues"
+    "url": "https://github.com/numandev1/react-native-bottomsheet-reanimated/issues"
   },
-  "homepage": "https://github.com/nomi9995/react-native-bottomsheet-reanimated#readme",
+  "homepage": "https://github.com/numandev1/react-native-bottomsheet-reanimated#readme",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "devDependencies": {
     "@commitlint/config-conventional": "^8.3.4",
     "@react-native-community/bob": "^0.16.2",
